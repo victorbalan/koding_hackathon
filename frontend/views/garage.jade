@@ -4,16 +4,21 @@ block content
 	.page-header
 		h3 Garage
 	h4 Select your car
-	div#accordion.panel-group(role='tablist', aria-multiselectable='true')
-		div.panel.panel-default
-			div#headingOne.panel-heading(role='tab')
-				.row
-					.col-md-11
-						h4.panel-title
-							a(data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
-								| Dacia
-					.col-md-1
-						| Buton
-			div#collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
-				div.panel-body
-					| Engine
+	-var count = 0
+	for car in cars
+		-count = count + 1
+		div#accordion.panel-group(role='tablist', aria-multiselectable='true')
+			div.panel.panel-default
+				div(id="heading#{count}").panel-heading(role='tab')
+					.row
+						.col-md-11
+							h4.panel-title
+								a(data-toggle='collapse', data-parent='#accordion', href='#collapse#{count}', aria-expanded='true', aria-controls='collapse#{count}')
+									| #{car.name}
+						.col-md-1
+							| Buton
+				div(id="collapse#{count}").panel-collapse.collapse.in(role='tabpanel', aria-labelledby='heading#{count}')
+					div.panel-body
+						| Car model
+						div.clear
+						p #{car.carModel}

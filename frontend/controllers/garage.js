@@ -1,10 +1,16 @@
 var request = require('request');
+var Car = require('../models/Car')
+
 /**
  * GET /fileUpload
  * FileUpload form page.
  */
  exports.getGarage = function(req, res) {
-  res.render('garage', {
-    title: 'Garage'
-  });
+	Car.find({userId: req.session.passport.user}, function(err, cars){
+		console.log(cars)
+		res.render('garage', {
+		title: 'Garage',
+		cars: cars
+		});
+	});
 };
