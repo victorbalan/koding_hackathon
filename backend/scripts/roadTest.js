@@ -14,12 +14,14 @@ module.exports = function(){
 	var wholeRoad = []
 
 	var start = new Intersection(intersectionId, 100,100, false)
+	start.id=1
 	intersectionsMap[intersectionId] = start
 	wholeRoad.push(start)
 	intersectionId++
 
 	var p1 = new Intersection(intersectionId, 100,150, false)
-	start.addAdjacentIntersection(p1.getId())
+	p1.id=2
+	start.addAdjacentIntersection(p1)
 	intersectionsMap[intersectionId] = p1
 	intersectionId++
 
@@ -30,7 +32,10 @@ module.exports = function(){
 	roadId++
 
 	var finish = new Intersection(intersectionId, 150,150, false)
+	finish.id=3
 	intersectionsMap[intersectionId] = finish
+	finish.addAdjacentIntersection(start)
+	p1.addAdjacentIntersection(finish)
 	intersectionId++
 
 	var road2 = new RoadPortion(roadId, p1, finish, "BORCANE")
@@ -50,12 +55,15 @@ module.exports = function(){
 	var carAcceleration = car.getAcceleration() //must be diffrent than 0
 	var carPosX
 	var carPosY
+	var nextIntersections
 	for(var i =0; i< wholeRoad.length; i++){
 		var nextIntersection
 		if(wholeRoad[i].getClassType() == "INTERSECTION"){	
 			carPosX = wholeRoad[i].getX()
 			carPosY = wholeRoad[i].getY()
 			car.setPosition(wholeRoad[i].getX(), wholeRoad[i].getY())
+			nextIntersections = wholeRoad[i].getAdjacentIntersections()
+			console.log(car.decideDirection(nextIntersections))
 			//console.log("intersection: "+car.getX() + " " + car.getY())
 		}else if(wholeRoad[i].getClassType() == "ROADPORTION"){
 			nextIntersection = wholeRoad[i+1]
@@ -77,7 +85,7 @@ module.exports = function(){
 				directionY = directionY/a
 				if(carAcceleration != 0){ // if carAcceleration is 0 then the carSpeed dosent change
 					carSpeed += carAcceleration*tick
-					console.log(carAcceleration)
+					//console.log(carAcceleration)
 				}
 				carPosX = carPosX + directionX*(carSpeed*tick) 
 				carPosY = carPosY + directionY*(carSpeed*tick)
@@ -93,7 +101,7 @@ module.exports = function(){
 			}
 		}
 	}
-	console.log(EventType.POTHOLE)
+	//console.log(EventType.POTHOLE)
 }
 
 var verifyPosition = function(carPosX, carPosY, carSpeed, nextIntersection, tick){
