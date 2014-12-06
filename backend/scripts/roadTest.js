@@ -14,7 +14,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 35 // car starts at 0m/s
+	var carSpeed = 100 // car starts at 0m/s
 	var carAcceleration = car.getAcceleration() //must be diffrent than 0
 	var carPosX = startIntersection.getX()
 	var carPosY = startIntersection.getY()
@@ -23,6 +23,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	var lastIntersection 
 	var finished = false
 	var carfuck = false
+	var currentLap = 1
 	while(!finished){
 		lastIntersection = nextIntersection	
 		nextIntersections = lastIntersection.getAdjacentIntersections()
@@ -40,7 +41,15 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				finishedRoad = true
 			}
 			if(verifyPosition(carPosX, carPosY, carSpeed, finishIntersection, tick)){
-				finished = true
+				if(startIntersection == finishIntersection){
+					if(currentLap==10){
+						finished = true
+					}else{
+						currentLap +=1
+					}
+				}else{
+					finished = true
+				}
 			}
 			if(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles)){
 				finished = true

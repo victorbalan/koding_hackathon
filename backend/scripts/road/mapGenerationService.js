@@ -32,24 +32,23 @@ module.exports.generate = function(intersectionMatrix, road, start, finish){
 			}
 			for(var j=0; j<intersectionMatrix[i].length; j++){
 				if(intersectionMatrix[i][j]!=undefined){
-					var intersection = createIntersection(i+1, j+1, intersectionMatrix[i][j].semaphore, intersectionMatrix[i][j].events)
+					var intersection = createIntersection(i, j, intersectionMatrix[i][j].semaphore, intersectionMatrix[i][j].events)
 					intersectionObjectMatrix[i][j] = intersection
 					intersectionList.push(intersection)
-					intersectionsMap[(i+1) + "" + (j+1)] = intersection
+					intersectionsMap[(i) + "" + (j)] = intersection
 				}
 			}
 		}
 	}
-
 	for(var i=0; i<road.length; i++){
 		var newRoad = createRoadPortion(
-			intersectionObjectMatrix[road[i].fromX-1][road[i].fromY-1],
-			intersectionObjectMatrix[road[i].toX-1][road[i].toY-1],
+			intersectionObjectMatrix[road[i].fromX][road[i].fromY],
+			intersectionObjectMatrix[road[i].toX][road[i].toY],
 			road[i].obstacles)
 		roadPortions[roadPortions.length] = newRoad
 		roadsMap[road[i].fromX+""+road[i].fromY+""+road[i].toX+""+road[i].toY] = newRoad
-		intersectionObjectMatrix[road[i].fromX-1][road[i].fromY-1]
-			.addAdjacentIntersection(intersectionObjectMatrix[road[i].toX-1][road[i].toY-1])
+		intersectionObjectMatrix[road[i].fromX][road[i].fromY]
+			.addAdjacentIntersection(intersectionObjectMatrix[road[i].toX][road[i].toY])
 	}
 	
 	return {'roadsMap': roadsMap, 'intersectionsMap': intersectionsMap,

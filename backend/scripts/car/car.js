@@ -14,10 +14,10 @@ module.exports = function(callback){
 		if(infoToNextObstacle!=undefined){
 			// console.log(infoToNextObstacle.distance)
 		}
-		this.acceleration = 15
-		if(this.x > 115){
-			this.acceleration = 10
-		}
+		this.acceleration = 0
+		// if(this.x > 115){
+		// 	this.acceleration = 10
+		// }
 		console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
 	}
 

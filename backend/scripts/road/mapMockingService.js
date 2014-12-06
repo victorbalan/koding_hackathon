@@ -5,11 +5,11 @@ var ObstacleType = require('./obstacleType')
 
 module.exports.getMockedBaseMap = function(){
 	var intersectionMatrix = []
-	intersectionMatrix[99] = []
-	intersectionMatrix[99][99] = {semaphore: true, events: ["GROAPA", "CACAT"]}
-	intersectionMatrix[99][149] = {semaphore: false, events: []}
-	intersectionMatrix[149] = []
-	intersectionMatrix[149][149] = {semaphore: false, events: []}
+	intersectionMatrix[100] = []
+	intersectionMatrix[100][100] = {semaphore: true, events: ["GROAPA", "CACAT"]}
+	intersectionMatrix[100][150] = {semaphore: false, events: []}
+	intersectionMatrix[150] = []
+	intersectionMatrix[150][150] = {semaphore: false, events: []}
 
 	var o1 = new Obstacle(0, 100, 145, ObstacleType.SPEEDLIMIT50)
 	var o2 = new Obstacle(0, 115, 150, ObstacleType.SPEEDLIMIT90)
@@ -19,4 +19,40 @@ module.exports.getMockedBaseMap = function(){
 		{fromX: 100, fromY: 150, toX: 150, toY: 150, obstacles: [o2, o3]}]
 
 	return MapGenerationService.generate(intersectionMatrix, road, 100100, 150150)
+}
+
+module.exports.getCircuitMap = function(){
+	var intersectionMatrix = []
+
+	intersectionMatrix[0] = []
+	intersectionMatrix[0][500] = {semaphore: true, events: []}
+	intersectionMatrix[0][1000] = {semaphore: false, events: []}
+
+	intersectionMatrix[500] = []
+	intersectionMatrix[500][1500] = {semaphore: false, events: []}
+
+	intersectionMatrix[1000] = []
+	intersectionMatrix[1000][1500] = {semaphore: false, events: []}
+
+	intersectionMatrix[1500] = []
+	intersectionMatrix[1500][1000] = {semaphore: false, events: []}
+	intersectionMatrix[1500][500] = {semaphore: false, events: []}
+
+	intersectionMatrix[1000][0] = {semaphore: false, events: []}
+	intersectionMatrix[500][0] = {semaphore: false, events: []}
+
+	var road = [{fromX: 0, fromY: 500, toX: 0, toY: 1000, obstacles: []},
+				{fromX: 0, fromY: 1000, toX: 500, toY: 1500, obstacles: []},
+				{fromX: 500, fromY: 1500, toX: 1000, toY: 1500, obstacles: []},
+				{fromX: 1000, fromY: 1500, toX: 1500, toY: 1000, obstacles: []},
+				{fromX: 1500, fromY: 1000, toX: 1500, toY: 500, obstacles: []},
+				{fromX: 1500, fromY: 500, toX: 1000, toY: 0, obstacles: []},
+				{fromX: 1000, fromY: 0, toX: 500, toY: 0, obstacles: []},
+				{fromX: 500, fromY: 0, toX: 0, toY: 500, obstacles: []}]
+
+	return MapGenerationService.generate(intersectionMatrix, road, '0500', '0500')
+}
+
+module.exports.getSprintMap = function(){
+
 }
