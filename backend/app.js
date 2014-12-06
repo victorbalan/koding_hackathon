@@ -24,6 +24,8 @@ app.options('*', function(req, res) {
 });
 
 require('./scripts/roadTest')()
+
+require('./routes')(app)
 app.listen(port);
 
 console.log('The App runs on port ' + port);
