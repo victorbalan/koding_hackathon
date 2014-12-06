@@ -30,9 +30,9 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var fileUpload = require('./controllers/fileUpload');
-
 var garage = require('./controllers/garage');
 var tutorial = require('./controllers/tutorial');
+var gameController = require('./controllers/game');
 
 /**
  * API keys and Passport configuration.
@@ -119,7 +119,7 @@ app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
-app.get('/forgot', userController.getForgot);
+app.get('/forgot', userController.getForgot); 
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
@@ -134,13 +134,16 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/fileUpload', fileUpload.getFileUpload);
 app.post('/fileUpload',multipart(), fileUpload.postFileUpload);
-
 app.get('/garage', garage.getGarage);
 app.post('/garage', multipart(), garage.postNewCar);
+<<<<<<< HEAD
 app.get('/car/delete/:carId', garage.deleteCar)
 
+=======
+>>>>>>> Added game
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
+app.get('/game', gameController.game);
 
 /**
  * API examples routes.
