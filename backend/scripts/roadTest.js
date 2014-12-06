@@ -2,47 +2,32 @@ var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
 var Car = require('./car/car')
 var EventType = require('./road/eventType')
+var MapGenerationService = require('./road/mapGenerationService')
 
 module.exports = function(){
-	var intersectionsMap = {}
-	var roadsMap = {}
-	var intersectionId = 1
-	var roadId = 1
-	var roadSizeTick = 1 
-	var tickDistance = 1
+	var intersectionMatrix = []
+	intersectionMatrix[99] = []
+	intersectionMatrix[99][99] = {semaphore: true, events: ["GROAPA", "CACAT"]}
+	intersectionMatrix[99][149] = {semaphore: false, events: []}
+	intersectionMatrix[149] = []
+	intersectionMatrix[149][149] = {semaphore: false, events: []}
+
+
+	var road = [{fromX: 100, fromY: 100, toX: 100, toY: 150},
+		{fromX: 100, fromY: 150, toX: 150, toY: 150}]
+
+	var generatedMapData = MapGenerationService.generate(intersectionMatrix, road)
+
+	var intersectionsMap = generatedMapData.intersectionsMap
+	var roadsMap = generatedMapData.roadsMap
 
 	var wholeRoad = []
 
-	var start = new Intersection(intersectionId, 100,100, false)
-	start.id=1
-	intersectionsMap[intersectionId] = start
-	wholeRoad.push(start)
-	intersectionId++
-
-	var p1 = new Intersection(intersectionId, 100,150, false)
-	p1.id=2
-	start.addAdjacentIntersection(p1)
-	intersectionsMap[intersectionId] = p1
-	intersectionId++
-
-	var road1 = new RoadPortion(roadId, start, p1, "GROOOPI")
-	roadsMap[roadId] = road1
-	wholeRoad.push(road1)
-	wholeRoad.push(p1)
-	roadId++
-
-	var finish = new Intersection(intersectionId, 150,150, false)
-	finish.id=3
-	intersectionsMap[intersectionId] = finish
-	finish.addAdjacentIntersection(start)
-	p1.addAdjacentIntersection(finish)
-	intersectionId++
-
-	var road2 = new RoadPortion(roadId, p1, finish, "BORCANE")
-	roadsMap[roadId] = road2
-	wholeRoad.push(road2)
-	wholeRoad.push(finish)
-	roadId++
+	wholeRoad.push(intersectionsMap[100100])
+	wholeRoad.push(roadsMap[100100100150])
+	wholeRoad.push(intersectionsMap[100150])
+	wholeRoad.push(roadsMap[100150150150])
+	wholeRoad.push(intersectionsMap[150150])
 
 	var car = new Car(function(eventType){
 		console.log(eventType)

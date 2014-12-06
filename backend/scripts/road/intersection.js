@@ -16,8 +16,8 @@ module.exports = function(id, x, y, semaphore){
 			return "INTERSECTION"
 		}
 
-		this.addAdjacentIntersection = function(intersectionId){
-			this.adjacentIntersections.push(intersectionId)
+		this.addAdjacentIntersection = function(intersection){
+			this.adjacentIntersections.push(intersection)
 		}
 
 		this.getAdjacentIntersections = function(){

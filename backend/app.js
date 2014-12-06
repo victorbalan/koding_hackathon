@@ -23,7 +23,6 @@ app.options('*', function(req, res) {
     res.send(200);
 });
 
-// require('./car-test.js')(app);
 require('./scripts/roadTest')()
 app.listen(port);
 
