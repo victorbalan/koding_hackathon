@@ -10,8 +10,11 @@ module.exports = function(callback){
 	this.elapsedTime = 0
 	this.nextIntersection
 
-	this.accelerate = function(){
-		this.acceleration = 1
+	this.accelerate = function(infoToNextObstacle){
+		if(infoToNextObstacle!=undefined){
+			// console.log(infoToNextObstacle.distance)
+		}
+		this.acceleration = 15
 		if(this.x > 115){
 			this.acceleration = 10
 		}

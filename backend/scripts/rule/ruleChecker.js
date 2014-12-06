@@ -1,7 +1,6 @@
 var ObstacleType = require('../road/obstacleType')
 
 module.exports.check = function(obstacleType, carSpeed){
-	console.log(obstacleType + " " + carSpeed)
 	switch(obstacleType){
 		case ObstacleType.POTHOLE:
 			if(carSpeed>25){
