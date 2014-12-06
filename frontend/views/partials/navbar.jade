@@ -14,6 +14,8 @@
         if user
           li(class=title=='Dashboard'?'active':undefined)
             a(href='/') Dashboard
+          li(class=title=='Garage'?'active':undefined)
+            a(href='/garage') Garage
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title=='Login'?'active':undefined)

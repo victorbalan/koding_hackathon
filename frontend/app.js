@@ -31,6 +31,8 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var fileUpload = require('./controllers/fileUpload');
 
+var garage = require('./controllers/garage');
+
 /**
  * API keys and Passport configuration.
  */
@@ -132,6 +134,7 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 app.get('/fileUpload', fileUpload.getFileUpload);
 app.post('/fileUpload',mutipartMiddleware(), fileUpload.postFileUpload);
 
+app.get('/garage', garage.getGarage);
 /**
  * API examples routes.
  */

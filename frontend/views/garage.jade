@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	.page-header
+		h3 Garage
+	h4 Select your car
+	div#accordion.panel-group(role='tablist', aria-multiselectable='true')
+		div.panel.panel-default
+			div#headingOne.panel-heading(role='tab')
+				.row
+					.col-md-11
+						h4.panel-title
+							a(data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+								| Dacia
+					.col-md-1
+						| Buton
+			div#collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
+				div.panel-body
+					| Engine
