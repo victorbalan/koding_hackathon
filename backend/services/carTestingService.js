@@ -5,3 +5,7 @@ var MapMockingService = require('../scripts/road/mapMockingService')
 module.exports.testCar = function(){
 	RoadTest.testCarForMockedCircuit(Car, MapMockingService.getMockedBaseMap())
 }
+
+module.exports.testUserCar = function(UserCar, callback){
+	RoadTest.testCarForMockedCircuit(UserCar, MapMockingService.getMockedBaseMap(), callback)
+}

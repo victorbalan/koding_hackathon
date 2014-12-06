@@ -3,7 +3,7 @@ var RoadPortion = require('./road/roadPortion')
 var RuleChecker = require('./rule/ruleChecker')
 
 
-module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
+module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callback){
 	var intersectionsMap = generatedMapData.intersectionsMap
 	var roadsMap = generatedMapData.roadsMap
 
@@ -22,6 +22,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	var nextIntersection = startIntersection
 	var lastIntersection 
 	var finished = false
+	var carfuck = false
 	while(!finished){
 		lastIntersection = nextIntersection	
 		nextIntersections = lastIntersection.getAdjacentIntersections()
@@ -43,6 +44,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 			}
 			if(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles)){
 				finished = true
+				carfuck = true
 				break
 			}
 			time += tick
@@ -73,6 +75,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 		}
 		carPosX = nextIntersection.getX()
 		carPosY = nextIntersection.getY()
+	}
+	if(callback!=undefined){
+		callback({response: "Test finished", crash: carfuck})
 	}
 }
 
