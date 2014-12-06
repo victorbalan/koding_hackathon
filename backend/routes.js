@@ -1,4 +1,6 @@
-var stringToModule = require('./scripts/stringToModule')
+var stringToModule = require('./services/stringToModule')
+var CarTestingService = require('./services/carTestingService')
+
 
 module.exports = function(app){
 

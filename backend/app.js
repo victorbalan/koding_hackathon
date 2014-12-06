@@ -23,9 +23,11 @@ app.options('*', function(req, res) {
     res.send(200);
 });
 
-require('./scripts/roadTest')()
-
 require('./routes')(app)
+
+var CarTestingService = require('./services/carTestingService')
+CarTestingService.testCar()
+
 app.listen(port);
 
 console.log('The App runs on port ' + port);

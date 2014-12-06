@@ -1,10 +1,9 @@
 var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
-var Car = require('./car/car')
 var EventType = require('./road/eventType')
 var MapGenerationService = require('./road/mapGenerationService')
 
-module.exports = function(){
+module.exports.testCarForMockedCircuit = function(Car){
 	var intersectionMatrix = []
 	intersectionMatrix[99] = []
 	intersectionMatrix[99][99] = {semaphore: true, events: ["GROAPA", "CACAT"]}
@@ -21,9 +20,8 @@ module.exports = function(){
 	var intersectionsMap = generatedMapData.intersectionsMap
 	var roadsMap = generatedMapData.roadsMap
 
-	var car = new Car(function(eventType){
-		console.log(eventType)
-	})
+	var car = new Car()
+
 	var startIntersection = intersectionsMap[100100]
 	var finishIntersection = intersectionsMap[150150]
 	car.setPosition(100,100)
