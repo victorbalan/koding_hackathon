@@ -32,6 +32,7 @@ var contactController = require('./controllers/contact');
 var fileUpload = require('./controllers/fileUpload');
 
 var garage = require('./controllers/garage');
+var tutorial = require('./controllers/tutorial');
 
 /**
  * API keys and Passport configuration.
@@ -136,6 +137,9 @@ app.post('/fileUpload',multipart(), fileUpload.postFileUpload);
 
 app.get('/garage', garage.getGarage);
 app.post('/garage', multipart(), garage.postNewCar);
+
+app.get('/tutorial', tutorial.getTutorial)
+app.get('/downloadModelCar', tutorial.getModelCar)
 
 /**
  * API examples routes.
