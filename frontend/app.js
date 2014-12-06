@@ -29,6 +29,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var fileUpload = require('./controllers/fileUpload');
 
 /**
  * API keys and Passport configuration.
@@ -36,6 +37,8 @@ var contactController = require('./controllers/contact');
 
 var secrets = require('./config/secrets');
 var passportConf = require('./config/passport');
+
+var mutipartMiddleware = require('connect-multiparty')
 
 /**
  * Create Express server.
@@ -56,7 +59,7 @@ mongoose.connection.on('error', function() {
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/url1', '/url2'];
+var csrfExclude = ['/fileUpload', '/url2'];
 
 /**
  * Express configuration.
@@ -126,6 +129,8 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+app.get('/fileUpload', fileUpload.getFileUpload);
+app.post('/fileUpload',mutipartMiddleware(), fileUpload.postFileUpload);
 
 /**
  * API examples routes.
