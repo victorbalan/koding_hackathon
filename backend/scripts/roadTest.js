@@ -59,7 +59,7 @@ module.exports = function(){
 			var finished = false
 			console.log(car.getX() + " " + car.getY())
 			while(!finished){
-				if(car.getX() >= nextIntersection.getX()-carSpeed*tick && car.getX() <= nextIntersection.getX()+carSpeed*tick && car.getY() >= nextIntersection.getY()-carSpeed*tick && car.getY() <= nextIntersection.getY()+carSpeed*tick){
+				if(verifyPosition(car, carSpeed, nextIntersection, tick)){
 					finished = true
 				}
 				time += tick
@@ -83,4 +83,11 @@ module.exports = function(){
 		}
 	}
 	console.log(EventType.POTHOLE)
+}
+
+var verifyPosition = function(car, carSpeed, nextIntersection, tick){
+	if(car.getX() >= nextIntersection.getX()-carSpeed*tick && car.getX() <= nextIntersection.getX()+carSpeed*tick && car.getY() >= nextIntersection.getY()-carSpeed*tick && car.getY() <= nextIntersection.getY()+carSpeed*tick){
+		return true
+	}
+	return false
 }
