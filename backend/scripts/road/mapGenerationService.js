@@ -2,7 +2,7 @@ var Intersection = require('./intersection')
 var RoadPortion = require('./roadPortion')
 var EventType = require('./eventType')
 
-module.exports.generate = function(intersectionMatrix, road){
+module.exports.generate = function(intersectionMatrix, road, start, finish){
 	var intersectionId = 1
 
 	intersectionObjectMatrix = []
@@ -52,5 +52,6 @@ module.exports.generate = function(intersectionMatrix, road){
 			.addAdjacentIntersection(intersectionObjectMatrix[road[i].toX-1][road[i].toY-1])
 	}
 	
-	return {'roadsMap': roadsMap, 'intersectionsMap': intersectionsMap, 'intersectionList': intersectionList}
+	return {'roadsMap': roadsMap, 'intersectionsMap': intersectionsMap,
+	 'intersectionList': intersectionList, 'start': start, 'finish': finish}
 }

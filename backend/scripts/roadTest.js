@@ -1,18 +1,15 @@
 var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
 var EventType = require('./road/eventType')
-var MapMockingService = require('./road/mapMockingService')
 
-module.exports.testCarForMockedCircuit = function(Car){
-	var generatedMapData = MapMockingService.getMockedBaseMap()
-
+module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	var intersectionsMap = generatedMapData.intersectionsMap
 	var roadsMap = generatedMapData.roadsMap
 
 	var car = new Car()
 
-	var startIntersection = intersectionsMap[100100]
-	var finishIntersection = intersectionsMap[150150]
+	var startIntersection = intersectionsMap[generatedMapData.start]
+	var finishIntersection = intersectionsMap[generatedMapData.finish]
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
