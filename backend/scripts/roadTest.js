@@ -14,7 +14,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 100 // car starts at 0m/s
+	var carSpeed = 1 // car starts at 0m/s
 	var carAcceleration = car.getAcceleration() //must be diffrent than 0
 	var carPosX = startIntersection.getX()
 	var carPosY = startIntersection.getY()
