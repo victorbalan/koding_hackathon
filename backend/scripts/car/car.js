@@ -4,8 +4,8 @@ module.exports = function(callback){
 	this.acceleration = 0
 	this.speed = 0
 	this.engine = new Engine(5, 140)
-	this.x
-	this.y
+	this.x = 0
+	this.y = 0
 	this.events 
 	this.elapsedTime
 

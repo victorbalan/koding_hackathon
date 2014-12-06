@@ -46,13 +46,13 @@ module.exports = function(){
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 0 // car starts at 0m/s
-	var carAcceleration = car.accelerate()
+	var carSpeed = 0.3 // car starts at 0m/s
+	var carAcceleration = 1 //must be diffrent than 0
 	for(var i =0; i< wholeRoad.length; i++){
 		var nextIntersection
 		if(wholeRoad[i].getClassType() == "INTERSECTION"){	
 			car.setPosition(wholeRoad[i].getX(), wholeRoad[i].getY())
-			//console.log("intersection: "+car.x + " " + car.y)
+			//console.log("intersection: "+car.getX() + " " + car.getY())
 		}else if(wholeRoad[i].getClassType() == "ROADPORTION"){
 			nextIntersection = wholeRoad[i+1]
 			wholeRoad[i+1].print()
@@ -63,10 +63,10 @@ module.exports = function(){
 					finished = true
 				}
 				time += tick
-				var directionX = (nextIntersection.getX() - car.getX())
-				var directionY = (nextIntersection.getY() - car.getY())
-				//console.log(car.x + " " + car.y)
-				var a = Math.abs(Math.sqrt(directionX*directionX+directionY*directionY))
+				var directionX = nextIntersection.getX() - car.getX()
+				var directionY = nextIntersection.getY() - car.getY()
+				//console.log(directionX + " " + directionY)
+				var a = Math.sqrt(directionX*directionX+directionY*directionY)
 				directionX = directionX/a
 				directionY = directionY/a
 				carSpeed += carAcceleration*tick
@@ -76,8 +76,9 @@ module.exports = function(){
 				//SET USER STUFF
 				car.setSpeed = carSpeed; 
 				car.setPosition(car.getX()+directionX*(carSpeed*tick), car.getY()+directionY*(carSpeed*tick))
+				//console.log(car.getX() + " " + car.getY())
 				//console.log(directionX*(carSpeed/tick) + " " + directionY*(carSpeed/tick))
-				console.log("car at: x="+car.x + " y=" + car.y + " at time:" + time + " with Speed: " + carSpeed)
+				console.log("car at: x="+car.getX() + " y=" + car.getY() + " at time:" + time + " with Speed: " + carSpeed)
 			}
 		}
 	}
