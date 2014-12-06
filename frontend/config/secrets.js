@@ -28,29 +28,29 @@ module.exports = {
   },
   
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '754220301289665',
-    clientSecret: process.env.FACEBOOK_SECRET || '41860e58c256a3d7ad8267d3c1939a4a',
+    clientID: process.env.FACEBOOK_ID || '815663831830006',
+    clientSecret: process.env.FACEBOOK_SECRET || '4d628be358d60aff05a6e48652be320f',
     callbackURL: '/auth/facebook/callback',
     passReqToCallback: true
   },
 
   github: {
-    clientID: process.env.GITHUB_ID || 'cb448b1d4f0c743a1e36',
-    clientSecret: process.env.GITHUB_SECRET || '815aa4606f476444691c5f1c16b9c70da6714dc6',
+    clientID: process.env.GITHUB_ID || '49dedf67e6852222a234',
+    clientSecret: process.env.GITHUB_SECRET || '67baefeb86586dd18108fd7e183b303e88a008ed',
     callbackURL: '/auth/github/callback',
     passReqToCallback: true
   },
 
   twitter: {
-    consumerKey: process.env.TWITTER_KEY || '6NNBDyJ2TavL407A3lWxPFKBI',
-    consumerSecret: process.env.TWITTER_SECRET  || 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa',
+    consumerKey: process.env.TWITTER_KEY || 'H2UU6SxYTT8VirqJKk5FDfW9Q',
+    consumerSecret: process.env.TWITTER_SECRET  || 'oiMDQJuW9D7FuBj4ulCzYtmB7hdj4Aqas6in5ZaWg01r4HzqaV',
     callbackURL: '/auth/twitter/callback',
     passReqToCallback: true
   },
 
   google: {
-    clientID: process.env.GOOGLE_ID || '828110519058.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_SECRET || 'JdZsIaWhUFIchmC1a_IZzOHb',
+    clientID: process.env.GOOGLE_ID || '750864683961-0okjt1roarlbcp25ofdk2j41dguan1og.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'C3cSFWDIqA5-URWyqo4E1b83',
     callbackURL: '/auth/google/callback',
     passReqToCallback: true
   },
