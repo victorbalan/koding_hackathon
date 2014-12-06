@@ -15,7 +15,7 @@ module.exports = function(callback){
 		if(this.x > 115){
 			this.acceleration = 10
 		}
-		//console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
+		console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
 	}
 
 	this.parseRoad = function(){
@@ -31,15 +31,16 @@ module.exports = function(callback){
 	this.decideDirection = function(intersections){
 		if(intersections.length <= 1){
 			if(intersections[0]!=undefined){
+				//console.log(intersections[0].getId())
 				return intersections[0].getId()
 			}
-			return undefined
+			return 0
 		}
 		else{
 			if(intersections[0]!=undefined){
 				return intersections[0].getId()
 			}
-			return undefined
+			return 0
 		}
 	}
 
