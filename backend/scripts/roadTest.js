@@ -1,6 +1,6 @@
 var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
-var Car = require('./car')
+var Car = require('./car/car')
 var EventType = require('./road/eventType')
 
 module.exports = function(){

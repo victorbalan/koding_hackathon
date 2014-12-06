@@ -1,4 +1,4 @@
-var Engine = require('./engine')
+var Engine = require('./modules/engine')
 
 module.exports = function(callback){
 	this.acceleration = 0
