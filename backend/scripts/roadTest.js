@@ -46,47 +46,58 @@ module.exports = function(){
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 0.3 // car starts at 0m/s
-	var carAcceleration = 1 //must be diffrent than 0
+	var carSpeed = 10 // car starts at 0m/s
+	var carAcceleration = car.getAcceleration() //must be diffrent than 0
+	var carPosX
+	var carPosY
 	for(var i =0; i< wholeRoad.length; i++){
 		var nextIntersection
 		if(wholeRoad[i].getClassType() == "INTERSECTION"){	
+			carPosX = wholeRoad[i].getX()
+			carPosY = wholeRoad[i].getY()
 			car.setPosition(wholeRoad[i].getX(), wholeRoad[i].getY())
 			//console.log("intersection: "+car.getX() + " " + car.getY())
 		}else if(wholeRoad[i].getClassType() == "ROADPORTION"){
 			nextIntersection = wholeRoad[i+1]
 			wholeRoad[i+1].print()
 			var finished = false
-			console.log(car.getX() + " " + car.getY())
+			//console.log(car.getX() + " " + car.getY())
 			while(!finished){
-				if(verifyPosition(car, carSpeed, nextIntersection, tick)){
+				if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 					finished = true
 				}
 				time += tick
-				var directionX = nextIntersection.getX() - car.getX()
-				var directionY = nextIntersection.getY() - car.getY()
+				//get the users acceleration
+				carAcceleration = car.getAcceleration()
+				var directionX = nextIntersection.getX() - carPosX
+				var directionY = nextIntersection.getY() - carPosY
 				//console.log(directionX + " " + directionY)
 				var a = Math.sqrt(directionX*directionX+directionY*directionY)
 				directionX = directionX/a
 				directionY = directionY/a
-				carSpeed += carAcceleration*tick
-				if(car.getX() > 115){
-					carAcceleration = -1.5
+				if(carAcceleration != 0){ // if carAcceleration is 0 then the carSpeed dosent change
+					carSpeed += carAcceleration*tick
+					console.log(carAcceleration)
 				}
-				//SET USER STUFF
-				car.setSpeed = carSpeed; 
-				car.setPosition(car.getX()+directionX*(carSpeed*tick), car.getY()+directionY*(carSpeed*tick))
+				carPosX = carPosX + directionX*(carSpeed*tick) 
+				carPosY = carPosY + directionY*(carSpeed*tick)
+				//SET USER STUFF 
+				car.setPosition(carPosX, carPosY)
+				car.setElapsedTime(time)
+				car.setSpeed(carSpeed)
 				//console.log(car.getX() + " " + car.getY())
 				//console.log(directionX*(carSpeed/tick) + " " + directionY*(carSpeed/tick))
-				console.log("car at: x="+car.getX() + " y=" + car.getY() + " at time:" + time + " with Speed: " + carSpeed)
+				//console.log("car at: x="+car.getX() + " y=" + car.getY() + " at time:" + time + " with Speed: " + carSpeed)
+				//call the users Accelerate function
+				car.accelerate()
 			}
 		}
 	}
 	console.log(EventType.POTHOLE)
 }
 
-var verifyPosition = function(car, carSpeed, nextIntersection, tick){
-	if(car.getX() >= nextIntersection.getX()-carSpeed*tick && car.getX() <= nextIntersection.getX()+carSpeed*tick && car.getY() >= nextIntersection.getY()-carSpeed*tick && car.getY() <= nextIntersection.getY()+carSpeed*tick){
+var verifyPosition = function(carPosX, carPosY, carSpeed, nextIntersection, tick){
+	if(carPosX >= nextIntersection.getX()-carSpeed*tick && carPosX <= nextIntersection.getX()+carSpeed*tick && carPosY >= nextIntersection.getY()-carSpeed*tick && carPosY <= nextIntersection.getY()+carSpeed*tick){
 		return true
 	}
 	return false

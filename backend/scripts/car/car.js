@@ -7,10 +7,14 @@ module.exports = function(callback){
 	this.x = 0
 	this.y = 0
 	this.events 
-	this.elapsedTime
+	this.elapsedTime = 0
 
-	this.accelerate = function(acceleration){
-		acceleration = 1
+	this.accelerate = function(){
+		this.acceleration = 1
+		if(this.x > 115){
+			this.acceleration = 10
+		}
+		console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
 	}
 
 	this.parseRoad = function(){
@@ -49,5 +53,9 @@ module.exports = function(callback){
 
 	this.setSpeed = function(speed){
 		this.speed = speed
+	}
+
+	this.setElapsedTime = function(time){
+		this.elapsedTime = time
 	}
 }
