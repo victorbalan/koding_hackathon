@@ -1,6 +1,7 @@
-var Intersection = require('./intersection')
-var RoadPortion = require('./roadPortion')
+var Intersection = require('./road/intersection')
+var RoadPortion = require('./road/roadPortion')
 var Car = require('./car')
+var EventType = require('./road/eventType')
 
 module.exports = function(){
 	var intersectionsMap = {}
@@ -78,4 +79,5 @@ module.exports = function(){
 			}
 		}
 	}
+	console.log(EventType.POTHOLE)
 }
