@@ -3,6 +3,16 @@ extends layout
 block content
 	.page-header
 		h3 Garage
+	form(method='post', enctype='multipart/form-data', role="form").row.form-horizontal
+		p.col-sm-offset-2 Select the car file to upload:
+		div.form-group
+			label(for='carName').col-sm-2.control-label Car name*
+			input(type='text', name='carName')#carName.col-sm-2
+		div.form-group
+			label(for='carName').col-sm-2.control-label Car file*
+			input(type='file', name='file')
+		div.form-group
+			input(type='submit', value='Upload file', name='submit').btn.btn-default.col-sm-offset-2
 	h4 Select your car
 	-var count = 0
 	for car in cars
@@ -11,13 +21,15 @@ block content
 			div.panel.panel-default
 				div(id="heading#{count}").panel-heading(role='tab')
 					.row
-						.col-md-11
+						.col-sm-10
 							h4.panel-title
 								a(data-toggle='collapse', data-parent='#accordion', href='#collapse#{count}', aria-expanded='true', aria-controls='collapse#{count}')
 									| #{car.name}
-						.col-md-1
-							| Buton
-				div(id="collapse#{count}").panel-collapse.collapse.in(role='tabpanel', aria-labelledby='heading#{count}')
+						.col-sm-1
+							i.glyphicon.glyphicon-pencil
+						.col-sm-1
+							i.glyphicon.glyphicon-remove
+				div(id="collapse#{count}").panel-collapse.collapse.out(role='tabpanel', aria-labelledby='heading#{count}')
 					div.panel-body
 						| Car model
 						div.clear

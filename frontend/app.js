@@ -40,7 +40,7 @@ var garage = require('./controllers/garage');
 var secrets = require('./config/secrets');
 var passportConf = require('./config/passport');
 
-var mutipartMiddleware = require('connect-multiparty')
+var multipart = require('connect-multiparty')
 
 /**
  * Create Express server.
@@ -61,7 +61,7 @@ mongoose.connection.on('error', function() {
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/fileUpload', '/url2'];
+var csrfExclude = ['/fileUpload', '/url2', '/garage'];
 
 /**
  * Express configuration.
@@ -132,9 +132,11 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/fileUpload', fileUpload.getFileUpload);
-app.post('/fileUpload',mutipartMiddleware(), fileUpload.postFileUpload);
+app.post('/fileUpload',multipart(), fileUpload.postFileUpload);
 
 app.get('/garage', garage.getGarage);
+app.post('/garage', multipart(), garage.postNewCar);
+
 /**
  * API examples routes.
  */
