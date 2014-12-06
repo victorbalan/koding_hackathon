@@ -46,8 +46,8 @@ module.exports = function(){
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 1 // this should be calculated each time from the user car acceleration
-	var carAcceleration = 1
+	var carSpeed = 0 // car starts at 0m/s
+	var carAcceleration = car.accelerate()
 	for(var i =0; i< wholeRoad.length; i++){
 		var nextIntersection
 		if(wholeRoad[i].getClassType() == "INTERSECTION"){	
@@ -73,6 +73,8 @@ module.exports = function(){
 				if(car.getX() > 115){
 					carAcceleration = -1.5
 				}
+				//SET USER STUFF
+				car.setSpeed = carSpeed; 
 				car.setPosition(car.getX()+directionX*(carSpeed*tick), car.getY()+directionY*(carSpeed*tick))
 				//console.log(directionX*(carSpeed/tick) + " " + directionY*(carSpeed/tick))
 				console.log("car at: x="+car.x + " y=" + car.y + " at time:" + time + " with Speed: " + carSpeed)
