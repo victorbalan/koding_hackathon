@@ -1,5 +1,7 @@
 var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
+var RuleChecker = require('./rule/ruleChecker')
+
 
 module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	var intersectionsMap = generatedMapData.intersectionsMap
@@ -12,7 +14,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 10 // car starts at 0m/s
+	var carSpeed = 25 // car starts at 0m/s
 	var carAcceleration = car.getAcceleration() //must be diffrent than 0
 	var carPosX = startIntersection.getX()
 	var carPosY = startIntersection.getY()
@@ -28,8 +30,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
        			nextIntersection = nextIntersections[i]
        		}
     	}
-    	//*** get obstacles
-		// console.log(roadsMap[createIdForRoadsMap(lastIntersection, nextIntersection)])
+    	//*** get obstacle
+		var obstacle = roadsMap[createIdForRoadsMap(lastIntersection, nextIntersection)].getObstacles()[0]
+
 		var finishedRoad = false
 		while(!finishedRoad){
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
@@ -37,6 +40,15 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 			}
 			if(verifyPosition(carPosX, carPosY, carSpeed, finishIntersection, tick)){
 				finished = true
+			}
+			if(obstacle != undefined && verifyPosition(carPosX, carPosY, carSpeed, obstacle, tick)){
+				var ruleCheck = RuleChecker.check(obstacle.getType(), carSpeed)
+				if(ruleCheck.fail == true){
+					finished = true
+					finishedRoad = true
+					console.log(ruleCheck.reason)
+					break
+				}
 			}
 			time += tick
 
@@ -64,8 +76,8 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	}
 }
 
-var verifyPosition = function(carPosX, carPosY, carSpeed, nextIntersection, tick){
-	if(carPosX >= nextIntersection.getX()-carSpeed*tick && carPosX <= nextIntersection.getX()+carSpeed*tick && carPosY >= nextIntersection.getY()-carSpeed*tick && carPosY <= nextIntersection.getY()+carSpeed*tick){
+var verifyPosition = function(carPosX, carPosY, carSpeed, position, tick){
+	if(carPosX >= position.getX()-carSpeed*tick && carPosX <= position.getX()+carSpeed*tick && carPosY >= position.getY()-carSpeed*tick && carPosY <= position.getY()+carSpeed*tick){
 		return true
 	}
 	return false

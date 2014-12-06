@@ -11,7 +11,7 @@ module.exports.getMockedBaseMap = function(){
 	intersectionMatrix[149] = []
 	intersectionMatrix[149][149] = {semaphore: false, events: []}
 
-	var o1 = new Obstacle(0, 100, 125, ObstacleType.POTHOLE)
+	var o1 = new Obstacle(0, 100, 145, ObstacleType.POTHOLE)
 	var o2 = new Obstacle(0, 115, 150, ObstacleType.POTHOLE)
 	var o3 = new Obstacle(0, 140, 150, ObstacleType.POTHOLE)
 
