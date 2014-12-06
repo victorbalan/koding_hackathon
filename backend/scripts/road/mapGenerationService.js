@@ -1,6 +1,6 @@
 var Intersection = require('./intersection')
 var RoadPortion = require('./roadPortion')
-var EventType = require('./eventType')
+var Obstacle = require('./obstacle')
 
 module.exports.generate = function(intersectionMatrix, road, start, finish){
 	var intersectionId = 1
@@ -20,8 +20,8 @@ module.exports.generate = function(intersectionMatrix, road, start, finish){
 		return intersection
 	}
 
-	var createRoadPortion = function(fromIntersection, toIntersection, type){
-		var roadPortion = new RoadPortion(0, fromIntersection, toIntersection, type)
+	var createRoadPortion = function(fromIntersection, toIntersection, obstacles){
+		var roadPortion = new RoadPortion(0, fromIntersection, toIntersection, obstacles)
 		return roadPortion
 	}
 
@@ -45,7 +45,7 @@ module.exports.generate = function(intersectionMatrix, road, start, finish){
 		var newRoad = createRoadPortion(
 			intersectionObjectMatrix[road[i].fromX-1][road[i].fromY-1],
 			intersectionObjectMatrix[road[i].toX-1][road[i].toY-1],
-			"NORMAL")
+			road[i].obstacles)
 		roadPortions[roadPortions.length] = newRoad
 		roadsMap[road[i].fromX+""+road[i].fromY+""+road[i].toX+""+road[i].toY] = newRoad
 		intersectionObjectMatrix[road[i].fromX-1][road[i].fromY-1]

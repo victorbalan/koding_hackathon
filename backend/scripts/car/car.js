@@ -49,22 +49,6 @@ module.exports = function(callback){
 		this.y = y
 	}
 
-	this.getX = function(){
-		return this.x
-	}
-
-	this.getY = function(){
-		return this.y
-	}
-
-	this.setX = function(x){
-		this.x = x
-	}
-
-	this.setY = function(){
-		this.y = y
-	}
-
 	this.getAcceleration = function(){
 		return this.acceleration;
 	}

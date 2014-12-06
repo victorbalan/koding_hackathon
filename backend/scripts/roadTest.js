@@ -1,6 +1,5 @@
 var Intersection = require('./road/intersection')
 var RoadPortion = require('./road/roadPortion')
-var EventType = require('./road/eventType')
 
 module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	var intersectionsMap = generatedMapData.intersectionsMap
@@ -24,16 +23,14 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 	while(!finished){
 		lastIntersection = nextIntersection	
 		nextIntersections = lastIntersection.getAdjacentIntersections()
-		//console.log(car.decideDirection(nextIntersections))
 		for(var i=0; i<nextIntersections.length; i++) {
-			//console.log(nextIntersections[i].getId()+ "   "+ car.decideDirection(nextIntersections))
        		if (nextIntersections[i].getId() == car.decideDirection(nextIntersections)){
        			nextIntersection = nextIntersections[i]
        		}
     	}
-		//console.log(nextIntersection)
+    	//*** get obstacles
+		// console.log(roadsMap[createIdForRoadsMap(lastIntersection, nextIntersection)])
 		var finishedRoad = false
-
 		while(!finishedRoad){
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
@@ -68,9 +65,12 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData){
 }
 
 var verifyPosition = function(carPosX, carPosY, carSpeed, nextIntersection, tick){
-	//console.log(nextIntersection)
 	if(carPosX >= nextIntersection.getX()-carSpeed*tick && carPosX <= nextIntersection.getX()+carSpeed*tick && carPosY >= nextIntersection.getY()-carSpeed*tick && carPosY <= nextIntersection.getY()+carSpeed*tick){
 		return true
 	}
 	return false
+}
+
+var createIdForRoadsMap = function(prevIntersection, nextIntersection){
+	return prevIntersection.getX() + "" + prevIntersection.getY() + "" + nextIntersection.getX() + "" + nextIntersection.getY()
 }

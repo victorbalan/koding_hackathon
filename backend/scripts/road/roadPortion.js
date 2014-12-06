@@ -1,16 +1,12 @@
-module.exports = function(id, fromIntersection, toIntersection, type){
+module.exports = function(id, fromIntersection, toIntersection, obstacles){
 	this.id = id
 	this.fromIntersection = fromIntersection
 	this.toIntersection = toIntersection
-	this.type = type
 	this.distance = 100
-	
-	this.getType = function(){
-		return this.type
-	}
+	this.obstacles = obstacles
 
 	this.print = function(){
-		console.log("from: " + fromIntersection.toStringC() + "; to: " + toIntersection.toStringC() + "; type: " + type)
+		console.log("from: " + fromIntersection.toStringC() + "; to: " + toIntersection.toStringC())
 	}
 
 	this.getClassType = function(){
@@ -27,5 +23,9 @@ module.exports = function(id, fromIntersection, toIntersection, type){
 
 	this.getToIntersection = function(){
 		return this.toIntersection
+	}
+
+	this.getObstacles = function(){
+		return this.obstacles
 	}
 }
