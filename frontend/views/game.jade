@@ -23,4 +23,4 @@ html
     script(src='http://cdn.html5quintus.com/v0.2.0/quintus-all.min.js')
     != js('game')
     script(type='text/javascript')
-      | startGame(!{JSON.stringify(roads)}, #{matrixMaxLength})
+      | startGame(!{JSON.stringify(roads)}, #{matrixMaxLength}, !{JSON.stringify(events)})
