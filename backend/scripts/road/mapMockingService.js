@@ -27,6 +27,18 @@ module.exports.getMockedBaseMap = function(){
 	return MapGenerationService.generate(intersectionMatrix, road, 100100, 100300)
 }
 
+module.exports.getRoadsForBaseMap = function(){
+	var road = [{fromX: 100, fromY: 100, toX: 100, toY: 150},
+		{fromX: 100, fromY: 150, toX: 150, toY: 150},
+		{fromX: 150, fromY: 150, toX: 150, toY: 200},
+		{fromX: 150, fromY: 200, toX: 100, toY: 250},
+		{fromX: 100, fromY: 250, toX: 100, toY: 300}]
+	return {
+		road: road,
+		maxLength: 301
+	}
+}
+
 module.exports.getCircuitMap = function(){
 	var intersectionMatrix = []
 

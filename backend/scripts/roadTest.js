@@ -123,9 +123,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	}
 	console.log(response)
 	if(callback!=undefined){
-		callback({response: response, crash: carfuck})
+		callback({events: response, crash: carfuck})
 	}
-	return response
+	return {events: response}
 }
 
 var verifyPosition = function(carPosX, carPosY, carSpeed, position, tick){

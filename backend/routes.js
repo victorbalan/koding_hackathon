@@ -1,12 +1,13 @@
 var stringToModule = require('./services/stringToModule')
 var CarTestingService = require('./services/carTestingService')
+var MapMockingService = require('./scripts/road/mapMockingService')
 
 
 module.exports = function(app){
 	app.post('/car/check', function(req, res){
 		var Car = stringToModule(req.body.data)
 		
-		CarTestingService.testUserCar(Car, function(response){
+		CarTestingService.testUserCar(Car, MapMockingService.getMockedBaseMap(), function(response){
 			console.log(response)
 			res.send(response)
 		})
@@ -19,5 +20,34 @@ module.exports = function(app){
 			console.log(response)
 			res.send(response)
 		})
+	})
+
+	app.post('/car/test', function(req, res){
+		var mapType = req.body.map
+		console.log(req.body.carModel)
+		var Car = stringToModule(req.body.carModel)
+
+		CarTestingService.testUserCar(Car, MapMockingService.getMockedBaseMap(), function(response){
+			response.roads = MapMockingService.getRoadsForBaseMap()
+			console.log(response)
+			res.send(response)
+		})
+	})
+
+	app.get('/base', function(req, res){
+		res.send(MapMockingService.getRoadsForBaseMap())
+	})
+
+	app.get('/sprint', function(req, res){
+
+	})
+
+	app.get('/circuit', function(req, res){
+
+	})
+
+	app.get('/level/:nr', function(req, res){
+		var levelNumber = req.params.nr
+
 	})
 }
