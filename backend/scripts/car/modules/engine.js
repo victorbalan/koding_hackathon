@@ -22,6 +22,18 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 		return carSpeed
 	}
 
+	this.getMaxSpeed = function(){
+		return this.maxSpeed
+	}
+
+	this.getMaxAcceleration = function(){
+		return this.maxAcceleration
+	}
+
+	this.getMaxBrakeing = function(){
+		return this.maxAcceleration
+	}
+
 	this.checkEngine = function(){
 		if(this.heat > this.heatThreshhold){
 			return false

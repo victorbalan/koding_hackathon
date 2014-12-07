@@ -18,36 +18,37 @@ var fs = require('fs')
 exports.postNewCar = function(req, res, next) {
 	// req.assert('fileToUpload', 'No file selected').notEmpty();
 	fs.readFile(req.files.file.path, 'utf8', function (err,data) {
-	  if (err) {
-	    console.log(err);
-	  }else{
-		var car = new Car({
-			userId: req.session.passport.user,
-			carModel: data,
-			name: req.body.carName,
-			maxSpeed: 100,
-			maxAcceleration: 1,
-			breaking: 5,
-			handling: 30,
-			grip: 70
-		})
-		car.save(function(err){
-			if(err){
-				res.redirect('/error')
-			}else{	
-			  	request.post('http://localhost:8081/car/check', 
+		if (err) {
+			console.log(err);
+		}else{
+		  	request.post('http://localhost:8081/car/info', 
 				{form: {data: data} },
 				function(error, response, body) {
 			        if (!error && response.statusCode == 200) {
-			            console.log(body)
+			        	console.log(body)
+			        	var jsonCar = JSON.parse(body).car
+			            var car = new Car({
+							userId: req.session.passport.user,
+							carModel: jsonCar.carModel,
+							name: req.body.carName,
+							maxSpeed: jsonCar.maxSpeed,
+							maxAcceleration: jsonCar.maxAcceleration,
+							breaking: jsonCar.maxBrakeing,
+							handling: 30,
+							grip: 70
+						})
+						car.save(function(err){
+							if(err){
+								console.log(err)
+								res.redirect('/error')
+							}else{	
+								res.redirect('/garage');
+							}
+						});
 			        }
 		   		});
- 				res.redirect('/garage');
-			}
-		})
-	  }
+		}
 	});
-	
 };
 
 exports.deleteCar = function(req, res){

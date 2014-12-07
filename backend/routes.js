@@ -11,4 +11,13 @@ module.exports = function(app){
 			res.send(response)
 		})
 	})
+
+	app.post('/car/info', function(req, res){
+		var Car = stringToModule(req.body.data)
+		
+		CarTestingService.getCarJsonFromConfigFile(Car, req.body.data, function(response){
+			console.log(response)
+			res.send(response)
+		})
+	})
 }
