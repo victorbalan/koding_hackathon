@@ -46,16 +46,14 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 		var finishedRoad = false
 		while(!finishedRoad){
-			if(counter % 3 == 0){
-				response.push({
-					event: 'NORMAL', 
-					time: time,
-					x: carPosX,
-					y: carPosY,
-					angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
-					carSpeed: carSpeed
-				})
-			}
+			response.push({
+				event: 'NORMAL', 
+				time: time,
+				x: carPosX,
+				y: carPosY,
+				angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
+				carSpeed: carSpeed
+			})
 			counter++ 
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
