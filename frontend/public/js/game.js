@@ -8,6 +8,7 @@
 //= require lib/quintus_tmx
 //= require lib/quintus_touch
 //= require lib/quintus_ui
+//= require mapGeneration
 
 var events = [ { event: 'NORMAL', time: 0, x: 100, y: 100, angle: 0, carSpeed: 0 },
   { event: 'NORMAL',
@@ -207,122 +208,127 @@ var events = [ { event: 'NORMAL', time: 0, x: 100, y: 100, angle: 0, carSpeed: 0
     x: 150,
     y: 200,
     angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.4000000000000017,
-    x: 145.05025253169416,
-    y: 204.94974746830584,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.5000000000000018,
-    x: 140.1005050633883,
-    y: 209.8994949366117,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.600000000000002,
-    x: 135.15075759508247,
-    y: 214.84924240491753,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.700000000000002,
-    x: 130.20101012677662,
-    y: 219.79898987322338,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.800000000000002,
-    x: 125.2512626584708,
-    y: 224.74873734152922,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 3.900000000000002,
-    x: 120.30151519016496,
-    y: 229.69848480983507,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.000000000000002,
-    x: 115.35176772185913,
-    y: 234.64823227814088,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.100000000000001,
-    x: 110.4020202535533,
-    y: 239.59797974644673,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.200000000000001,
-    x: 105.45227278524746,
-    y: 244.54772721475254,
-    angle: -45,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.300000000000001,
-    x: 100,
-    y: 250,
-    angle: 0,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.4,
-    x: 100,
-    y: 257,
-    angle: 0,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.5,
-    x: 100,
-    y: 264,
-    angle: 0,
-    carSpeed: 70 },
-  { event: 'NORMAL',
-    time: 4.6,
-    x: 100,
-    y: 270.95,
-    angle: 0,
-    carSpeed: 69.5 },
-  { event: 'NORMAL',
-    time: 4.699999999999999,
-    x: 100,
-    y: 277.84999999999997,
-    angle: 0,
-    carSpeed: 69 },
-  { event: 'NORMAL',
-    time: 4.799999999999999,
-    x: 100,
-    y: 284.7,
-    angle: 0,
-    carSpeed: 68.5 },
-  { event: 'NORMAL',
-    time: 4.899999999999999,
-    x: 100,
-    y: 291.5,
-    angle: 0,
-    carSpeed: 68 },
-  { event: 'NORMAL',
-    time: 4.999999999999998,
-    x: 100,
-    y: 298.25,
-    angle: 0,
-    carSpeed: 67.5 },
-  { event: 'FINISH',
-    time: 4.999999999999998,
-    x: 100,
-    y: 298.25,
-    angle: 0,
-    carSpeed: 67.5 } ];
+    carSpeed: 70 }]
+  // { event: 'NORMAL',
+  //   time: 3.4000000000000017,
+  //   x: 145.05025253169416,
+  //   y: 204.94974746830584,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 3.5000000000000018,
+  //   x: 140.1005050633883,
+  //   y: 209.8994949366117,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 3.600000000000002,
+  //   x: 135.15075759508247,
+  //   y: 214.84924240491753,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 3.700000000000002,
+  //   x: 130.20101012677662,
+  //   y: 219.79898987322338,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 3.800000000000002,
+  //   x: 125.2512626584708,
+  //   y: 224.74873734152922,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 3.900000000000002,
+  //   x: 120.30151519016496,
+  //   y: 229.69848480983507,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.000000000000002,
+  //   x: 115.35176772185913,
+  //   y: 234.64823227814088,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.100000000000001,
+  //   x: 110.4020202535533,
+  //   y: 239.59797974644673,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.200000000000001,
+  //   x: 105.45227278524746,
+  //   y: 244.54772721475254,
+  //   angle: -45,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.300000000000001,
+  //   x: 100,
+  //   y: 250,
+  //   angle: 0,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.4,
+  //   x: 100,
+  //   y: 257,
+  //   angle: 0,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.5,
+  //   x: 100,
+  //   y: 264,
+  //   angle: 0,
+  //   carSpeed: 70 },
+  // { event: 'NORMAL',
+  //   time: 4.6,
+  //   x: 100,
+  //   y: 270.95,
+  //   angle: 0,
+  //   carSpeed: 69.5 },
+  // { event: 'NORMAL',
+  //   time: 4.699999999999999,
+  //   x: 100,
+  //   y: 277.84999999999997,
+  //   angle: 0,
+  //   carSpeed: 69 },
+  // { event: 'NORMAL',
+  //   time: 4.799999999999999,
+  //   x: 100,
+  //   y: 284.7,
+  //   angle: 0,
+  //   carSpeed: 68.5 },
+  // { event: 'NORMAL',
+  //   time: 4.899999999999999,
+  //   x: 100,
+  //   y: 291.5,
+  //   angle: 0,
+  //   carSpeed: 68 },
+  // { event: 'NORMAL',
+  //   time: 4.999999999999998,
+  //   x: 100,
+  //   y: 298.25,
+  //   angle: 0,
+  //   carSpeed: 67.5 },
+  // { event: 'FINISH',
+  //   time: 4.999999999999998,
+  //   x: 100,
+  //   y: 298.25,
+  //   angle: 0,
+  //   carSpeed: 67.5 } ];
 
-$(document).ready(function() {
+var startGame = function(road, matrixMaxLength) {
+	console.log(road)
+	console.log(matrixMaxLength)
+
   	var Q = Quintus()
   			.setup("game")
-  			.include("Sprites, UI, Input, Touch, Anim, Scenes, 2D")
+  			.include("Sprites, UI, Input, Touch, Anim, Scenes, 2D, Test")
   			.controls()
   			.touch();
+
+	var generatedMap = Q.transformMatrixToMap(road, matrixMaxLength)
 
   	Q.Sprite.extend("Car", {
 	    init: function(p) {
@@ -342,10 +348,10 @@ $(document).ready(function() {
 	Q.scene('Game', function(stage) {
 		stage.insert(new Q.Repeater({asset: "background.png", scale: 1}))
 
-		/*stage.insert(new Q.TileLayer({
-			dataAsset: 'circuit.json',
+		stage.insert(new Q.MyTileLayer({
+			dataAsset: generatedMap,
 			sheet: 'tiles'
-		}));*/
+		}));
 
 		var car = new Q.Car({x: 100, y:100, scale: 0.4}); 
 		car.add("tween");
@@ -353,10 +359,10 @@ $(document).ready(function() {
 		stage.insert(car);
 		stage.add("viewport").follow(car, {x:true, y:true});
 
-		stage.viewport.scale = 2;
+		stage.viewport.scale = 0.5;
 
 		for (i = 0; i < events.length - 1; i++) {
-   			car.chain({x: events[i].x * 32, y: events[i].y * 32, angle: - events[i].angle}, events[i+1].time - events[i].time);
+   			car.chain({x: events[i].x * 64.25, y: events[i].y * 64.25, angle: - events[i].angle}, events[i+1].time - events[i].time);
    		}	
 	});
  
@@ -365,4 +371,4 @@ $(document).ready(function() {
  		Q.sheet("car", "car.png", {tilew: 63, tileh: 118});
  		Q.stageScene("Game");
  	});
-});
+};
