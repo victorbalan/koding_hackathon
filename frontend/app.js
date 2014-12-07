@@ -137,6 +137,7 @@ app.post('/fileUpload',multipart(), fileUpload.postFileUpload);
 
 app.get('/garage', garage.getGarage);
 app.post('/garage', multipart(), garage.postNewCar);
+app.get('/car/delete/:carId', garage.deleteCar)
 
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)

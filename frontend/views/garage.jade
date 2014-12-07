@@ -32,17 +32,17 @@ block content
 		-count = count + 1
 		div#accordion.panel-group(role='tablist', aria-multiselectable='true')
 			div.panel.panel-default
-				div(id="heading#{count}").panel-heading(role='tab')
+				div(id="heading#{count}", role='tab').panel-heading
 					.row
 						.col-sm-10
 							h4.panel-title
 								a(data-toggle='collapse', data-parent='#accordion', href='#collapse#{count}', aria-expanded='true', aria-controls='collapse#{count}')
 									| #{car.name}
 						.col-sm-1
-							i.glyphicon.glyphicon-pencil
+							a.glyphicon.glyphicon-pencil
 						.col-sm-1
-							i.glyphicon.glyphicon-remove
-				div(id="collapse#{count}").panel-collapse.collapse.out(role='tabpanel', aria-labelledby='heading#{count}')
+							a.glyphicon.glyphicon-remove(href='/car/delete/#{car._id}')
+				div(id="collapse#{count}", role='tabpanel', aria-labelledby='heading#{count}').panel-collapse.collapse.out
 					div.panel-body
 						| Car model
 						div.clear

@@ -8,7 +8,6 @@ var fs = require('fs')
  */
  exports.getGarage = function(req, res) {
 	Car.find({userId: req.session.passport.user}, function(err, cars){
-		console.log(cars)
 		res.render('garage', {
 		title: 'Garage',
 		cars: cars
@@ -22,28 +21,37 @@ exports.postNewCar = function(req, res, next) {
 	  if (err) {
 	    console.log(err);
 	  }else{
-	  	saveCar(req.session.passport.user, data, req.body.carName)
-	  	request.post('http://localhost:8081/car/check', 
-		{form: {data: data} },
-		function(error, response, body) {
-	        if (!error && response.statusCode == 200) {
-	            console.log(body)
-	        }
-   		});
-	  }
-	});
-	
- 	res.redirect('/garage');
-};
-var saveCar = function(userId, carModel, carName){
 		var car = new Car({
-			userId: userId,
-			carModel: carModel,
-			name: carName
+			userId: req.session.passport.user,
+			carModel: data,
+			name: req.body.carName
 		})
 		car.save(function(err){
 			if(err){
+				res.redirect('/error')
 			}else{	
+			  	request.post('http://localhost:8081/car/check', 
+				{form: {data: data} },
+				function(error, response, body) {
+			        if (!error && response.statusCode == 200) {
+			            console.log(body)
+			        }
+		   		});
+ 				res.redirect('/garage');
 			}
 		})
+	  }
+	});
+	
+};
+
+exports.deleteCar = function(req, res){
+	console.log(req.params.carId)
+	Car.remove({_id: req.params.carId}, function(err){
+		if(err){
+			res.redirect('/error')
+		}else{
+			res.redirect('/garage')
+		}
+	})
 }
