@@ -3,8 +3,6 @@ extends layout
 block content
 	.page-header
 		h3 Garage
-		.button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
-			| Add new car
 		#myModal.modal.fade(aria-hidden='true', aria-labelledby='myModalLabel', role='dialog', tabindex='-1')
 			.modal-dialog
 				.modal-content
@@ -33,16 +31,16 @@ block content
 			div.panel.panel-default
 				div(id="heading#{count}", role='tab').panel-heading
 					.row
-						.col-sm-10
+						.col-sm-11
 							h4.panel-title
 								a(data-toggle='collapse', data-parent='#accordion', href='#collapse#{count}', aria-expanded='true', aria-controls='collapse#{count}')
 									| #{car.name}
 						.col-sm-1
-							a.glyphicon.glyphicon-pencil
-						.col-sm-1
-							a.glyphicon.glyphicon-remove(href='/car/delete/#{car._id}')
+							a.glyphicon.glyphicon-remove.col-sm-offset-8(href='/car/delete/#{car._id}')
 				div(id="collapse#{count}", role='tabpanel', aria-labelledby='heading#{count}').panel-collapse.collapse.out
 					div.panel-body
 						| Car model
 						div.clear
 						p #{car.carModel}
+	.button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
+		| Add new car
