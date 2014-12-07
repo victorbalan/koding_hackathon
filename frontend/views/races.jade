@@ -5,16 +5,19 @@ block content
 		h3 Races
 	h4 This is our current possible races. Select a car, a race and may the code be on your side.
 	.row
-		form(method='post', role="form").form-horizontal.col-sm-12
+		form(method='get', role="form", action = "/game").form-horizontal.col-sm-4
 			.form-group
-				p.col-sm-1.control-label Car:
-				.col-sm-2
+				p.col-sm-4.control-label Car:
+				.col-sm-6
 					select.form-control
 						each car in cars
 							option #{car.name}
 			.form-group
-				p.col-sm-1.control-label Race:
-				.col-sm-2
+				p.col-sm-4.control-label Race:
+				.col-sm-6
 					select.form-control
 						each race in races
 							option #{race.name}
+			.form-group
+				.col-sm-4.col-sm-offset-4
+					input(type='submit', value='Start race', name='submit').btn.btn-default.form-control
