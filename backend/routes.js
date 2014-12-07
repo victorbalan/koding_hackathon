@@ -23,14 +23,45 @@ module.exports = function(app){
 	})
 
 	app.post('/car/test', function(req, res){
-		var mapType = req.body.map
-		//console.log(req.body.carModel)
+		var raceId = req.body.raceId
 		var Car = stringToModule(req.body.carModel)
-
-		CarTestingService.testUserCar(Car, MapMockingService.getCircuitMap(), function(response){
-			//console.log(response)
-			res.send(response)
-		})
+		switch(raceId){
+			case "LVL1":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(1), function(response){
+					res.send(response)
+				})
+				break
+			case "LVL2":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(2), function(response){
+					res.send(response)
+				})
+				break
+			case "LVL3":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(3), function(response){
+					res.send(response)
+				})
+				break
+			case "LVL4":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(4), function(response){
+					res.send(response)
+				})
+				break
+			case "LVL5":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(5), function(response){
+					res.send(response)
+				})
+				break
+			case "CIRCUIT":
+				CarTestingService.testUserCar(Car, MapMockingService.getCircuitMap(), function(response){
+					res.send(response)
+				})
+				break
+			case "SPRINT":
+				res.send(404)
+				break 
+			default:
+				res.send(404)
+		}
 	})
 
 	app.get('/base', function(req, res){

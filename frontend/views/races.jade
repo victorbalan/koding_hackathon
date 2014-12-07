@@ -3,21 +3,24 @@ extends layout
 block content
 	.page-header
 		h3 Races
+		| #{error}
 	h4 This is our current possible races. Select a car, a race and may the code be on your side.
 	.row
-		form(method='get', role="form", action = "/game").form-horizontal.col-sm-4
+		form(method='post', role="form", action = "/game").form-horizontal.col-sm-4
 			.form-group
 				p.col-sm-4.control-label Car:
 				.col-sm-6
-					select.form-control
+					select.form-control(name = 'carId')
 						each car in cars
-							option #{car.name}
+							if(cars.indexOf(car)!=-1)
+								option(value='#{car._id}') #{car.name}
 			.form-group
 				p.col-sm-4.control-label Race:
 				.col-sm-6
-					select.form-control
+					select.form-control(name = 'raceId')
 						each race in races
-							option #{race.name}
+							if(races.indexOf(race)!=-1)
+								option(value='#{race._id}') #{race.name}
 			.form-group
 				.col-sm-4.col-sm-offset-4
 					input(type='submit', value='Start race', name='submit').btn.btn-default.form-control

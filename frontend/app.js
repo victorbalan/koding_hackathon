@@ -141,7 +141,7 @@ app.post('/garage', multipart(), garage.postNewCar);
 app.get('/car/delete/:carId', garage.deleteCar)
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
-app.get('/game', gameController.game);
+app.post('/game', gameController.game);
 app.get('/races', races.getRaces);
 app.get('/dashboard', dashboard.getDashboard)
 
