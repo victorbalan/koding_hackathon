@@ -10,7 +10,8 @@
 //= require lib/quintus_ui
 //= require mapGeneration
 
-$(document).ready(function() {
+var goMap = function(road) {
+	console.log(road)
   	var Q = Quintus()
   			.setup("map")
   			.include("Sprites,UI,Input,Touch,Anim,Scenes,2D,Test")
@@ -55,4 +56,4 @@ $(document).ready(function() {
  		Q.sheet("circuit", "tiles.png", {tilew: 32, tileh: 32});
  		Q.stageScene("Game");
  	});
-});
+}

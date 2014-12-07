@@ -3,7 +3,7 @@ var Engine = require('./scripts/car/modules/engine')
 module.exports = function(callback){
 	this.acceleration = 0
 	this.speed = 0
-	this.engine 
+	this.engine = new Engine(100,14,46)
 	this.x = 0
 	this.y = 0
 	this.events 
@@ -66,5 +66,9 @@ module.exports = function(callback){
 
 	this.setEngine = function(engine){
 		this.engine = engine
+	}
+	
+	this.getEngine = function(){
+		return this.engine
 	}
 }
