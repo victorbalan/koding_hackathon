@@ -51,7 +51,7 @@ module.exports.getCircuitMap = function(){
 		  {fromX: 100, fromY: 300, toX: 100, toY: 100, obstacles: []}]
 
 
-	return MapGenerationService.generate(intersectionMatrix, road, '100100', '100100', 301)
+	return MapGenerationService.generate(intersectionMatrix, road, '100100', '100100', 302)
 }
 
 module.exports.getSprintMap = function(){

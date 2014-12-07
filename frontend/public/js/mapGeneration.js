@@ -6,6 +6,7 @@ Quintus.Test = function(Q) {
   }
 
     Q.transformMatrixToMap = function(roads, length){
+    	console.log("TRANFORM MAP")
 		var TOP_PART = 20
 		var BOTTOM_PART = 19
 		var LEFT_PART = 24
@@ -64,6 +65,7 @@ Quintus.Test = function(Q) {
 			}
 			if(matrix[i-1]!=undefined){
 				if(zeroOrUndefinedCheck(matrix[i-1][j]) && zeroOrUndefinedCheck(matrix[i][j-1])){
+					console.log(i + " " + j + " and " + matrix[i+1][j] + " " + matrix[i][j+1] + " asd")
 					matrix[i][j] = OUTER_TOP_LEFT
 				}
 				if(zeroOrUndefinedCheck(matrix[i-1][j]) && zeroOrUndefinedCheck(matrix[i][j+1])){
@@ -167,7 +169,7 @@ Quintus.Test = function(Q) {
 	   }
 	   response += '\n'
 	  }
-	  console.log(response)
+	  // console.log(response)
     	return matrix
 
     }

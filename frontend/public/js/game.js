@@ -11,8 +11,8 @@
 //= require mapGeneration
 
 var startGame = function(road, matrixMaxLength, events) {
-	console.log(road);
-	console.log(matrixMaxLength);
+	// console.log(road);
+	// console.log(matrixMaxLength);
 	console.log(events);
   	var Q = Quintus()
   			.setup("game")
@@ -29,12 +29,12 @@ var startGame = function(road, matrixMaxLength, events) {
 	        	sprite: "car",
 	        	frame: 0
 	        });         
-	   	}	   	
+	   	}  	
 	});
 
 	Q.animations('car', {
 		go: { frames: [1], loop: false},
-		stop: { frames: [0], loop: false },
+		stop: { frames: [0], loop: false }
 	});
 
 	Q.scene('Game', function(stage) {
@@ -52,9 +52,23 @@ var startGame = function(road, matrixMaxLength, events) {
 		stage.add("viewport").follow(car, {x:true, y:true});
 
 		stage.viewport.scale = 1;
-
+		var selfi = 0
 		for (i = 0; i < events.length - 1; i++) {
-   			car.chain({x: events[i].x * 64.1, y: events[i].y * 64.1, angle: - events[i].angle}, events[i+1].time - events[i].time);
+   			car.chain({x: events[i].x * 64.1, y: events[i].y * 64.1, angle: - events[i].angle}, events[i+1].time - events[i].time,
+   				{
+					callback: function() {
+						selfi++
+						if(events[selfi].carSpeed!=undefined){
+							$('#carSpeed').text("Speed: " + events[selfi].carSpeed + " m/s")
+						}
+						if(events[selfi].carAcceleration!=undefined){
+							$('#carAcceleration').text("Acceleration: " + events[selfi].carAcceleration + " m/s2")
+						}
+						if(events[selfi].currentLap!=undefined){
+							$('#currentLab').text("Current lap: " + events[selfi].currentLap)
+						}
+					} 
+				});
    		}	
 	});
  
