@@ -10,7 +10,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(40, 70, -5)
+	var engine = new Engine(2, 5, -5)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
@@ -123,9 +123,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	}
 	console.log(response)
 	if(callback!=undefined){
-		callback({events: response, crash: carfuck})
+		callback({events: response, crash: carfuck, roads: generatedMapData.roads, roadsLength: generatedMapData.roadsLength})
 	}
-	return {events: response}
+	return response
 }
 
 var verifyPosition = function(carPosX, carPosY, carSpeed, position, tick){

@@ -27,8 +27,7 @@ module.exports = function(app){
 		console.log(req.body.carModel)
 		var Car = stringToModule(req.body.carModel)
 
-		CarTestingService.testUserCar(Car, MapMockingService.getMockedBaseMap(), function(response){
-			response.roads = MapMockingService.getRoadsForBaseMap()
+		CarTestingService.testUserCar(Car, MapMockingService.getCircuitMap(), function(response){
 			console.log(response)
 			res.send(response)
 		})

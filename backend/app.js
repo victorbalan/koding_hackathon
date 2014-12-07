@@ -25,9 +25,6 @@ app.options('*', function(req, res) {
 
 require('./routes')(app)
 
-var CarTestingService = require('./services/carTestingService')
-CarTestingService.testCar()
-
 app.listen(port);
 
 console.log('The App runs on port ' + port);

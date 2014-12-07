@@ -2,7 +2,7 @@ var Intersection = require('./intersection')
 var RoadPortion = require('./roadPortion')
 var Obstacle = require('./obstacle')
 
-module.exports.generate = function(intersectionMatrix, road, start, finish){
+module.exports.generate = function(intersectionMatrix, road, start, finish, roadsLength){
 	var intersectionId = 1
 
 	intersectionObjectMatrix = []
@@ -52,5 +52,5 @@ module.exports.generate = function(intersectionMatrix, road, start, finish){
 	}
 	
 	return {'roadsMap': roadsMap, 'intersectionsMap': intersectionsMap,
-	 'intersectionList': intersectionList, 'start': start, 'finish': finish}
+	 'intersectionList': intersectionList, 'start': start, 'finish': finish, 'roads': road, 'roadsLength': roadsLength}
 }

@@ -51,10 +51,10 @@ var startGame = function(road, matrixMaxLength, events) {
 		stage.insert(car);
 		stage.add("viewport").follow(car, {x:true, y:true});
 
-		stage.viewport.scale = 0.5;
+		stage.viewport.scale = 1;
 
 		for (i = 0; i < events.length - 1; i++) {
-   			car.chain({x: events[i].x * 64.25, y: events[i].y * 64.25, angle: - events[i].angle}, events[i+1].time - events[i].time);
+   			car.chain({x: events[i].x * 64.1, y: events[i].y * 64.1, angle: - events[i].angle}, events[i+1].time - events[i].time);
    		}	
 	});
  
