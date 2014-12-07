@@ -1,28 +1,66 @@
-extends layout
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='csrf-token', content=_csrf)
+    title #{title} - Hackathon Starter
+    != css('main')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    link(rel="stylesheet",href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css")
+  body
+    include partials/navbar
 
-block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
-  hr
-  .row
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-      a(href='/fileUpload') FileUpload
+    header
+      .container
+        .row(style="padding:30px;")
+          .col-lg-12.text-center
+            .jsracers-logo
+            span.jsracers-logo-title jsRacers
+            p.jsracers-logo-description Warning! Addicting game!
+
+    .container
+      h1.text-center Introduction
+      hr
+      .row
+        .col-lg-12
+          h4.text-center Welcome to JsRacer, the car race game that teaches you one of the coolest programing languages: JavaScript.
+          h4.text-center In this tutorial you will recieve a model car from wich you can start to code on your own. You can download it  <a href="/downloadModelCar">here</a>.
+          br
+          h4.text-center Next you can open the model in your favourite code editor and then start designing your car.
+          h4.text-center Your car will do exactly what you coded it to do so be carefull, as in real life, there are rules on the road!
+          br
+          h4.text-center When you finished the car design, you will have to upload the file in the <a href="/garage">garage</a> page, click the "Add new car". 
+          br
+          h4.text-center Next you should test your car on the track, to see how is it behaving. You can do this on the <a href="/races">races</a> page.
+          h4.text-center Here you select the car and the race type and then click "Start race".
+          br
+    .blue-background
+      .container
+        h1.text-center Rules
+        hr
+        .row
+          .col-lg-12
+            h4 Rules that apply to this game (when you are driving, not racing) are the rules that you usually apply in real life when you are driving.
+            ul
+              li
+                h4 Speed limit is: 50 km/h. If you exceed this speed limit the police will chase you down and stop you.
+              li
+                h4 You have to stop on traffic lights. If you don't stop, the police will stop you.
+            h4 When you are racing, on a local track, you won't have to obey driving rules, as you will try to test and get the best out of your car.
+            br
+    .container
+      h1.text-center The environement
+      hr
+      .row
+        .col-lg-12
+          h4 When driving, road quality and weather affect you a lot. For example, you may encounter potholes on the road which will destroy your car if you don't slow down.
+          h4 When racing, road quality is perfect, but you will still have to be considerate if the track is wet, frozen, iceberg etc.
+
+    include partials/footer
+
+    != js('application')
+
+
+  

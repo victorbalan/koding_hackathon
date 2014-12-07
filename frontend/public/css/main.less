@@ -4,6 +4,11 @@
 @import "lib/ionicons/ionicons";
 @import "themes/default";
 
+@font-face {
+    font-family: eight-bit;
+    src: url(../fonts/8-bit_wonder-webfont.woff);
+}
+
 // Scaffolding
 // -------------------------
 
@@ -34,6 +39,14 @@ footer {
   margin: -15px 15px -15px;
 }
 
+// Header
+// -------------------------
+
+header {
+  margin-top: -10px;
+  background: #66CCFF;
+}
+
 // Alerts
 // -------------------------
 
@@ -50,6 +63,67 @@ footer {
   box-shadow: 0 0 5px #ccc, inset 0 0 0 #000;
 }
 
+.jsracers-logo {
+  background: url('../images/car.png') no-repeat 0 0;
+  width: 63px;
+  height: 118px;
+  margin: 20px auto 10px;
+  -ms-transform: rotate(270deg) scale(2); /* IE 9 */
+  -webkit-transform: rotate(270deg) scale(2); /* Chrome, Safari, Opera */
+  transform: rotate(270deg) scale(2);
+}
+
+.jsracers-logo-title {
+  font-family: 'eight-bit';
+  width: 100%;
+  font-size: 25px;
+  margin-bottom:20px;
+}
+
+.jsracers-logo-title{
+  -webkit-animation: color-change 1s infinite;
+  -moz-animation: color-change 1s infinite;
+  -o-animation: color-change 1s infinite;
+  -ms-animation: color-change 1s infinite;
+  animation: color-change 1s infinite;
+}
+
+.jsracers-logo-description{
+  font-family: 'eight-bit';
+  font-size: 16px; 
+}
+
+@-webkit-keyframes color-change {
+    0% { color: red; }
+    25% { color: blue; }
+    75% { color: yellow; }
+    100% { color: red; }
+}
+@-moz-keyframes color-change {
+    0% { color: red; }
+    25% { color: blue; }
+    75% { color: yellow; }
+    100% { color: red; }
+}
+@-ms-keyframes color-change {
+    0% { color: red; }
+    25% { color: blue; }
+    75% { color: yellow; }
+    100% { color: red; }
+}
+@-o-keyframes color-change {
+    0% { color: red; }
+    25% { color: blue; }
+    75% { color: yellow; }
+    100% { color: red; }
+}
+@keyframes color-change {
+    0% { color: red; }
+    25% { color: blue; }
+    75% { color: yellow; }
+    100% { color: red; }
+}
+
 // Font Icons
 // -------------------------
 
@@ -58,6 +132,14 @@ footer {
   margin-right: 5px;
 }
 
+// Home
+h1 {
+  font-family: 'eight-bit' !important;
+}
+
+.blue-background {
+  background: #66CCFF; 
+}
 // Margins
 .margin-bottom-50 {
   margin-bottom: 50px;
