@@ -66,7 +66,7 @@ module.exports.getLevelMap = function(level){
 			intersectionMatrix[100][100] = {semaphore: true, events: []}
 			intersectionMatrix[100][500] = {semaphore: false, events: []}
 
-			var road = [{fromX: 100, fromY: 100, toX: 100, toY: 150, obstacles: []}]
+			var road = [{fromX: 100, fromY: 100, toX: 100, toY: 500, obstacles: []}]
 
 			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100500, 501)
 			break;

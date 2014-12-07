@@ -7,10 +7,11 @@ var Engine = require('./car/modules/engine')
 module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callback){
 	var intersectionsMap = generatedMapData.intersectionsMap
 	var roadsMap = generatedMapData.roadsMap
+	var roadsLength = generatedMapData.roadsLength
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(2, 5, -5)
+	var engine = new Engine(5, 150, -100)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
@@ -54,7 +55,6 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				angle: referenceDegree,
 				carSpeed: carSpeed
 			})
-			counter++ 
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
 			}
@@ -90,6 +90,11 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				finished = true
 				carfuck = true
 				break
+			}
+			counter++
+			if(counter > 9000 || isOutOfBounds(carPosX, carPosY, roadsLength)){
+				finishedRoad = true
+				carfuck = true
 			}
 			time += tick
 			carAcceleration = engine.getAcceleration(car.getAcceleration())
@@ -189,4 +194,11 @@ var computeAngle = function(lastIntersection, nextIntersection){
 	dx = nextIntersection.getX() - lastIntersection.getX()
 	dy = nextIntersection.getY() - lastIntersection.getY()
 	return Math.atan2(dx, dy) * 180 / Math.PI
+}
+
+var isOutOfBounds = function(carPosX, carPosY, roadsLength){
+	if(carPosX > roadsLength && carPosY > roadsLength && carPosX < 0 && carPosY < 0){
+		return true
+	}
+	return false
 }
