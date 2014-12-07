@@ -1,0 +1,40 @@
+extends layout
+
+block content
+	.page-header
+		h3 Dashboard
+	.row
+		.col-sm-2
+			img(src="#{user.gravatar()}", class='profile', width='100', height='100')
+		.col-sm-10
+			br
+			br
+			| #{user.profile.name || user.email || user.id}&nbsp;
+	br
+	table.table.table-hover
+		h4 Stats
+		tr
+			td
+				| Cars owned:
+			td
+				| 2
+		tr
+			td
+				| Most used car:
+			td
+				| RenO
+		tr
+			td
+				| Maximum speed reached:
+			td
+				| 50 km/h
+		tr
+			td
+				| Races played:
+			td
+				| 1
+		tr
+			td
+				| Races won:
+			td
+				| 1

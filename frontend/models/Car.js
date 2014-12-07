@@ -8,7 +8,9 @@ var carSchema = new mongoose.Schema({
 	maxAcceleration: {type: Number, required: true},
 	breaking: {type: Number, required: true},
 	handling: {type: Number, required: true},
-	grip: {type: Number, required: true}
+	grip: {type: Number, required: true},
+	isFav: {type: Boolean, required: true},
+	maxSpeedReached: {type: Number, required: true}
 });
 
 module.exports = mongoose.model('Car', carSchema);

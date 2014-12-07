@@ -35,7 +35,9 @@ exports.postNewCar = function(req, res, next) {
 							maxAcceleration: jsonCar.maxAcceleration,
 							breaking: jsonCar.maxBrakeing,
 							handling: 30,
-							grip: 70
+							grip: 70,
+							isFav: false,
+							maxSpeedReached: 101
 						})
 						car.save(function(err){
 							if(err){

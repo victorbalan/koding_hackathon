@@ -34,6 +34,7 @@ var races = require('./controllers/races');
 var garage = require('./controllers/garage');
 var tutorial = require('./controllers/tutorial');
 var gameController = require('./controllers/game');
+var dashboard = require('./controllers/dashboard');
 
 /**
  * API keys and Passport configuration.
@@ -141,7 +142,8 @@ app.get('/car/delete/:carId', garage.deleteCar)
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
 app.get('/game', gameController.game);
-app.get('/races', races.getRaces)
+app.get('/races', races.getRaces);
+app.get('/dashboard', dashboard.getDashboard)
 
 /**
  * API examples routes.
