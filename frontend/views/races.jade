@@ -1,40 +1,24 @@
-doctype html
-html
-	head
-		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		meta(name='csrf-token', content=_csrf)
-		title #{title} - Hackathon Starter
-		!= css('main')
-	body
-		include partials/navbar
-		.container
-			include partials/flash
-			block content
-				.page-header
-					h3 Races
-				h4 This is our current possible races. Select a car, a race and may the code be on your side.
-				.row
-					form(method='get', role="form", action = "/game").form-horizontal.col-sm-4
-						.form-group
-							p.col-sm-4.control-label Car:
-							.col-sm-6
-								select.form-control
-									each car in cars
-										option #{car.name}
-						.form-group
-							p.col-sm-4.control-label Race:
-							.col-sm-6
-								select.form-control
-									each race in races
-										option #{race.name}
-						.form-group
-							.col-sm-4.col-sm-offset-4
-								input(type='submit', value='Start race', name='submit').btn.btn-default.form-control
-						canvas(id="map", width="800", height="600")
-					!= js('application')
-					script(src='http://cdn.html5quintus.com/v0.2.0/quintus-all.min.js')
-					!= js('map')
-					script(type='text/javascript')
-						| goMap(!{JSON.stringify(fuckingMap)}, #{matrixMaxLength})
+extends layout
+
+block content
+	.page-header
+		h3 Races
+	h4 This is our current possible races. Select a car, a race and may the code be on your side.
+	.row
+		form(method='get', role="form", action = "/game").form-horizontal.col-sm-4
+			.form-group
+				p.col-sm-4.control-label Car:
+				.col-sm-6
+					select.form-control
+						each car in cars
+							option #{car.name}
+			.form-group
+				p.col-sm-4.control-label Race:
+				.col-sm-6
+					select.form-control
+						each race in races
+							option #{race.name}
+			.form-group
+				.col-sm-4.col-sm-offset-4
+					input(type='submit', value='Start race', name='submit').btn.btn-default.form-control
+			canvas(id="map", width="800", height="600")
