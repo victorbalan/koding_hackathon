@@ -10,15 +10,16 @@
 //= require lib/quintus_ui
 //= require mapGeneration
 
-var goMap = function(road) {
+var goMap = function(road, matrixMaxLength) {
 	console.log(road)
+	console.log(matrixMaxLength)
   	var Q = Quintus()
   			.setup("map")
   			.include("Sprites,UI,Input,Touch,Anim,Scenes,2D,Test")
   			.controls()
   			.touch();
 	Q.test("mama ta e o grasana")
-	var generatedMap = Q.transformMatrixToMap()
+	var generatedMap = Q.transformMatrixToMap(road, matrixMaxLength)
 	// Q.transformMatrixToMap()
   	Q.Sprite.extend("Car", {
 	    init: function(p) {

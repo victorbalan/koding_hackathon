@@ -5,18 +5,8 @@ Quintus.Test = function(Q) {
     console.log(msg)
   }
 
-    Q.transformMatrixToMap = function(){
-  //   	var roads = [{fromX: 0, fromY: 0, toX: 0, toY: 10},
-		// {fromX: 0, fromY: 10, toX: 10, toY: 10},
-		// {fromX: 10, fromY: 10, toX: 10, toY: 0},
-		// {fromX: 10, fromY: 0, toX: 0, toY: 0}]
-
-		var roads = [{fromX: 10, fromY: 10, toX: 10, toY: 15},
-		  {fromX: 10, fromY: 15, toX: 15, toY: 15},
-		  {fromX: 15, fromY: 15, toX: 15, toY: 20},
-		  {fromX: 15, fromY: 20, toX: 10, toY: 25},
-		  {fromX: 10, fromY: 25, toX: 10, toY: 30}]
-		var matrixLength = 62
+    Q.transformMatrixToMap = function(roads, length){
+		var matrixLength = 2*length
 		var getEmptyMatrix = function(n){
 			var m = []
 			for(var i=0;i<n;i++){

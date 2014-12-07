@@ -37,4 +37,4 @@ html
 					script(src='http://cdn.html5quintus.com/v0.2.0/quintus-all.min.js')
 					!= js('map')
 					script(type='text/javascript')
-						| goMap('#{fuckingMap}')
+						| goMap(!{JSON.stringify(fuckingMap)}, #{matrixMaxLength})
