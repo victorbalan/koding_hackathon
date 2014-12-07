@@ -12,29 +12,16 @@ module.exports = function(callback){
 
 	this.accelerate = function(infoToNextObstacle){
 		if(infoToNextObstacle!=undefined){
-			// console.log(infoToNextObstacle.distance)
 		}
 		this.acceleration = 100
 		if(this.y > 260){
 			this.acceleration = -100
-		}
-		//console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
-	}
-
-	this.parseRoad = function(){
-		if(this.road.getClassType() == "INTERSECTION"){
-			this.road.print()
-		}else if(this.road.getClassType() == "ROADPORTION"){
-			this.accelerate(this.engine.getMaxAcceleration())
-
-			this.road.print()
 		}
 	}
 
 	this.decideDirection = function(intersections){
 		if(intersections.length <= 1){
 			if(intersections[0]!=undefined){
-				//console.log(intersections[0].getId())
 				return intersections[0].getId()
 			}
 			return 0
