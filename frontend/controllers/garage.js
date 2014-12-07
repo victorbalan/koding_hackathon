@@ -24,7 +24,12 @@ exports.postNewCar = function(req, res, next) {
 		var car = new Car({
 			userId: req.session.passport.user,
 			carModel: data,
-			name: req.body.carName
+			name: req.body.carName,
+			maxSpeed: 100,
+			maxAcceleration: 1,
+			breaking: 5,
+			handling: 30,
+			grip: 70
 		})
 		car.save(function(err){
 			if(err){

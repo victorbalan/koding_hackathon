@@ -44,5 +44,35 @@ block content
 						| Car model
 						div.clear
 						p #{car.carModel}
+						.panel.panel-default
+							.panel-heading
+								| Car stats
+							.panel-body
+								.row
+									.col-sm-2
+										| Top Speed
+									.col-sm-10
+										div.progress
+											div.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{car.maxSpeed}', aria-valuemin='0', aria-valuemax='100', style='width: #{car.maxSpeed}%')
+									.col-sm-2
+										| Acceleration
+									.col-sm-10
+										div.progress
+											div.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{car.maxAcceleration}', aria-valuemin='0', aria-valuemax='100', style='width: #{car.maxAcceleration}%')
+									.col-sm-2
+										| Breaking
+									.col-sm-10
+										div.progress
+											div.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{car.breaking}', aria-valuemin='0', aria-valuemax='100', style='width: #{car.breaking}%')
+									.col-sm-2
+										| handling
+									.col-sm-10
+										div.progress
+											div.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{car.handling}', aria-valuemin='0', aria-valuemax='100', style='width: #{car.handling}%')
+									.col-sm-2
+										| Grip
+									.col-sm-10
+										div.progress
+											div.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{car.grip}', aria-valuemin='0', aria-valuemax='100', style='width: #{car.grip}%')
 	.button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
 		| Add new car
