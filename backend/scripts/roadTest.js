@@ -39,7 +39,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 		//console.log(angle)
 		var nextPointAngle = 2;
 		if(verifyPosition(carPosX, carPosY, carSpeed, finishIntersection, tick)){
-				console.log("Current Lap: " + currentLap)
+				//console.log("Current Lap: " + currentLap)
 		}
     	//*** get obstacle
 		var obstacles = roadsMap[createIdForRoadsMap(lastIntersection, nextIntersection)].getObstacles()
