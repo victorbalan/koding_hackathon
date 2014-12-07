@@ -136,11 +136,7 @@ app.get('/fileUpload', fileUpload.getFileUpload);
 app.post('/fileUpload',multipart(), fileUpload.postFileUpload);
 app.get('/garage', garage.getGarage);
 app.post('/garage', multipart(), garage.postNewCar);
-<<<<<<< HEAD
 app.get('/car/delete/:carId', garage.deleteCar)
-
-=======
->>>>>>> Added game
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
 app.get('/game', gameController.game);
