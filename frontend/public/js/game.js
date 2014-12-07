@@ -46,26 +46,33 @@ var startGame = function(road, matrixMaxLength, events) {
 		}));
 
 		var car = new Q.Car({x: 100, y:100, scale: 0.4}); 
-		car.add("tween");
+		car.add("tween, animation");
 
 		stage.insert(car);
 		stage.add("viewport").follow(car, {x:true, y:true});
 
-		stage.viewport.scale = 1;
+		stage.viewport.scale = 1.5;
 		var selfi = 0
 		for (i = 0; i < events.length - 1; i++) {
    			car.chain({x: events[i].x * 64.1, y: events[i].y * 64.1, angle: - events[i].angle}, events[i+1].time - events[i].time,
    				{
 					callback: function() {
 						selfi++
-						if(events[selfi].carSpeed!=undefined){
-							$('#carSpeed').text("Speed: " + events[selfi].carSpeed + " m/s")
-						}
-						if(events[selfi].carAcceleration!=undefined){
-							$('#carAcceleration').text("Acceleration: " + events[selfi].carAcceleration + " m/s2")
-						}
-						if(events[selfi].currentLap!=undefined){
-							$('#currentLab').text("Current lap: " + events[selfi].currentLap)
+						if(events[selfi]!=undefined){
+							if(events[selfi].carSpeed!=undefined){
+								$('#carSpeed').text("Speed: " + events[selfi].carSpeed + " m/s")
+							}
+							if(events[selfi].carAcceleration!=undefined){
+								if(events[selfi].carAcceleration>0){
+									car.play('stop')
+								}else{
+									car.play('stop')
+								}
+								$('#carAcceleration').text("Acceleration: " + events[selfi].carAcceleration + " m/s2")
+							}
+							if(events[selfi].currentLap!=undefined){
+								$('#currentLap').text("Current lap: " + events[selfi].currentLap)
+							}
 						}
 					} 
 				});
