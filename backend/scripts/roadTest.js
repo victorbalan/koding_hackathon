@@ -51,7 +51,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				time: time,
 				x: carPosX,
 				y: carPosY,
-				angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
+				angle: referenceDegree,
 				carSpeed: carSpeed
 			})
 			counter++ 
@@ -67,7 +67,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 							time: time,
 							x: carPosX,
 							y: carPosY,
-							angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
+							angle: referenceDegree,
 							carSpeed: carSpeed
 						})
 					}else{
@@ -80,12 +80,12 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 						time: time,
 						x: carPosX,
 						y: carPosY,
-						angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
+						angle: referenceDegree,
 						carSpeed: carSpeed
 					})
 				}
 			}
-			if(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles, response, time)){
+			if(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree)){
 				//if we pass an obstacle set a flag on it as passed or it can be triggered twice
 				finished = true
 				carfuck = true
@@ -139,7 +139,7 @@ var createIdForRoadsMap = function(prevIntersection, nextIntersection){
 	return prevIntersection.getX() + "" + prevIntersection.getY() + "" + nextIntersection.getX() + "" + nextIntersection.getY()
 }
 
-var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, response, time){
+var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree){
 	for(var i=0;i<obstacles.length;i++){
 		if(verifyPosition(carPosX, carPosY, carSpeed, obstacles[i], tick)){
 			var ruleCheck = RuleChecker.check(obstacles[i].getType(), carSpeed)
@@ -150,7 +150,7 @@ var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, re
 					time: time,
 					x: obstacles[i].getX(),
 					y: obstacles[i].getY(),
-					angle: 0,
+					angle: referenceDegree,
 					carSpeed: carSpeed
 				})
 				if(ruleCheck.accelerationMultiplier != undefined){
