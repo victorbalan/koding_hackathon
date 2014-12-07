@@ -64,7 +64,7 @@ mongoose.connection.on('error', function() {
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/fileUpload', '/url2', '/garage'];
+var csrfExclude = ['/fileUpload', '/game', '/garage'];
 
 /**
  * Express configuration.

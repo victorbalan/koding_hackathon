@@ -16,7 +16,7 @@ module.exports = function(callback){
 		}
 		this.acceleration = 100
 		if(this.y > 260){
-			this.acceleration = -100
+			this.acceleration = 100
 		}
 		//console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
 	}
