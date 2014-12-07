@@ -30,6 +30,7 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var fileUpload = require('./controllers/fileUpload');
+var races = require('./controllers/races');
 var garage = require('./controllers/garage');
 var tutorial = require('./controllers/tutorial');
 var gameController = require('./controllers/game');
@@ -140,6 +141,7 @@ app.get('/car/delete/:carId', garage.deleteCar)
 app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
 app.get('/game', gameController.game);
+app.get('/races', races.getRaces)
 
 /**
  * API examples routes.
