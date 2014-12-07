@@ -145,14 +145,6 @@ var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, re
 			var ruleCheck = RuleChecker.check(obstacles[i].getType(), carSpeed)
 			if(ruleCheck.fail == true){
 				//console.log(ruleCheck.reason)
-				response.push({
-					event: obstacles[i].type,
-					time: time,
-					x: obstacles[i].getX(),
-					y: obstacles[i].getY(),
-					angle: referenceDegree,
-					carSpeed: carSpeed
-				})
 				if(ruleCheck.accelerationMultiplier != undefined){
 					return false
 				}
