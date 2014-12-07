@@ -10,7 +10,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(2, 30, -5)
+	var engine = new Engine(40, 70, -5)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
@@ -28,6 +28,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	var finished = false
 	var carfuck = false
 	var currentLap = 1
+	var counter = 1
 	var referenceDegree = 0
 	while(!finished){
 		lastIntersection = nextIntersection	
@@ -45,14 +46,17 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 		var finishedRoad = false
 		while(!finishedRoad){
-			response.push({
-				event: 'NORMAL', 
-				time: time,
-				x: carPosX,
-				y: carPosY,
-				angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
-				carSpeed: carSpeed
-			})
+			if(counter % 3 == 0){
+				response.push({
+					event: 'NORMAL', 
+					time: time,
+					x: carPosX,
+					y: carPosY,
+					angle: (nextPointAngle == 1 || nextPointAngle == 2)&&nextPointAngle--? angle/2:0,
+					carSpeed: carSpeed
+				})
+			}
+			counter++ 
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
 			}
@@ -145,7 +149,7 @@ var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, re
 				//console.log(ruleCheck.reason)
 				response.push({
 					event: obstacles[i].type,
-					time: 10,
+					time: time,
 					carPosX: obstacles[i].getX(),
 					carPosY: obstacles[i].getY(),
 					carAngle: 0,
