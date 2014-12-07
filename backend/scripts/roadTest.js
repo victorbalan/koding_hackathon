@@ -47,7 +47,6 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 		var finishedRoad = false
 		while(!finishedRoad){
-			addJsonResponse(response, 'NORMAL', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
 			}
@@ -64,12 +63,17 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 					addJsonResponse(response, 'FINISHED', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 				}
 			}
-			if(obstacleFailCheck(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree).failed){
+			var obstacle = obstacleFailCheck(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree)
+			//console.log(obstacle)
+			if(obstacle.code == 1){
 				//if we pass an obstacle set a flag on it as passed or it can be triggered twice
-				//console.log(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree).reason)
 				finished = true
 				carfuck = true
 				break
+			}else if(obstacle.code == 2){
+				addJsonResponse(response, obstacle.reason.type, time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
+			}else{
+				addJsonResponse(response, 'NORMAL', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 			}
 			counter++
 			if(counter > 9000 || isOutOfBounds(carPosX, carPosY, roadsLength)){
@@ -132,13 +136,13 @@ var obstacleFailCheck = function(car, carPosX, carPosY, carSpeed, tick, obstacle
 				//console.log(ruleCheck.reason)
 				if(ruleCheck.accelerationMultiplier != undefined){
 					car.engine.setFlat()
-					return {failed: false, reason: ruleCheck.reason}
+					return {code: 2, reason: obstacles[i]}
 				}
-				return {failed: true, reason: ruleCheck.reason}
+				return {code: 1, reason: obstacles[i]}
 			}
 		}
 	}
-	return {failed: false, reason: 'Ok'}
+	return {code: 0, reason: 'Ok'}
 }
 
 var distanceToObstacle = function(carPosX, carPosY, obstacle){

@@ -24,7 +24,7 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 	}
 
 	this.getMaxSpeed = function(){
-		return this.maxSpeed = this.maxSpeed * 0.8
+		return this.maxSpeed = this.maxSpeed
 	}
 
 	this.getMaxAcceleration = function(){
@@ -44,8 +44,8 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 
 	this.setFlat = function(){
 		if(this.wheels > 0){
-			this.maxAcceleration = this.maxAcceleration * 0.6
-			this.maxSpeed = this.maxSpeed * 0.8
+			this.maxAcceleration = this.maxAcceleration * 0.9
+			this.maxSpeed = this.maxSpeed * 0.9
 			this.wheels--
 		}
 	}
