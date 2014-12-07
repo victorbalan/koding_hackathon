@@ -16,6 +16,19 @@ exports.game = function(req, res) {
 			    		var roads = jsonBody.roads
 						var maxLength = jsonBody.roadsLength; 	
 			    		//console.log(events)
+			    		var race = new Race({
+							userid: req.session.passport.user,
+							carid: req.body.carId,
+							raceType: req.body.raceId,
+							maxSpeed: Math.floor((Math.random() * 100) + 1),
+							won: Math.random() >= 0.5
+						});
+						race.save(function(err){
+							if(err){
+								console.log('Could not save the race!');
+								console.log(err);
+							}
+						});
 						res.render('game', {
 							title: 'Game',
 							roads: roads,
@@ -61,18 +74,3 @@ exports.game = function(req, res) {
 		});
 	}
 }
-
-
-// var race = new Race({
-// 		userid: req.session.passport.user,
-// 		carid: req.body.carid,
-// 		raceType: req.body.raceType,
-// 		maxSpeed: Math.floor((Math.random() * 100) + 1)
-// });
-// race.save(function(err){
-
-// if(err){
-// 	console.log(err)
-// 	res.redirect('/error')
-// }else{	
-// }
