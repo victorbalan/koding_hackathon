@@ -4,6 +4,7 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 	this.heat = 20
 	this.heatThreshhold = 200
 	this.maxBraking = maxBreaking
+	this.wheels = 4
 
 	this.getAcceleration = function(carAcceleration){
 		if(carAcceleration > this.maxAcceleration){
@@ -23,7 +24,7 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 	}
 
 	this.getMaxSpeed = function(){
-		return this.maxSpeed
+		return this.maxSpeed = this.maxSpeed * 0.8
 	}
 
 	this.getMaxAcceleration = function(){
@@ -39,5 +40,13 @@ module.exports = function(maxAcceleration, maxSpeed, maxBreaking){
 			return false
 		}
 		return true
+	}
+
+	this.setFlat = function(){
+		if(this.wheels > 0){
+			this.maxAcceleration = this.maxAcceleration * 0.6
+			this.maxSpeed = this.maxSpeed * 0.8
+			this.wheels--
+		}
 	}
 }

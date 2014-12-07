@@ -47,14 +47,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 		var finishedRoad = false
 		while(!finishedRoad){
-			response.push({
-				event: 'NORMAL', 
-				time: time,
-				x: carPosX,
-				y: carPosY,
-				angle: referenceDegree,
-				carSpeed: carSpeed
-			})
+			addJsonResponse(response, 'NORMAL', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 			if(verifyPosition(carPosX, carPosY, carSpeed, nextIntersection, tick)){
 				finishedRoad = true
 			}
@@ -62,31 +55,18 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				if(startIntersection == finishIntersection){
 					if(currentLap == 10){
 						finished = true
-						response.push({
-							event: 'FINISH', 
-							time: time,
-							x: carPosX,
-							y: carPosY,
-							angle: referenceDegree,
-							carSpeed: carSpeed
-						})
+						addJsonResponse(response, 'FINISHED', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 					}else{
 						currentLap +=1
 					}
 				}else{
 					finished = true
-					response.push({
-						event: 'FINISH', 
-						time: time,
-						x: carPosX,
-						y: carPosY,
-						angle: referenceDegree,
-						carSpeed: carSpeed
-					})
+					addJsonResponse(response, 'FINISHED', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
 				}
 			}
-			if(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree)){
+			if(obstacleFailCheck(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree).failed){
 				//if we pass an obstacle set a flag on it as passed or it can be triggered twice
+				//console.log(obstacleFailCheck(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree).reason)
 				finished = true
 				carfuck = true
 				break
@@ -126,7 +106,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 		carPosX = nextIntersection.getX()
 		carPosY = nextIntersection.getY()
 	}
-	//console.log(response)
+	console.log(response)
 	if(callback!=undefined){
 		callback({events: response, crash: carfuck, roads: generatedMapData.roads, roadsLength: generatedMapData.roadsLength})
 	}
@@ -144,20 +124,21 @@ var createIdForRoadsMap = function(prevIntersection, nextIntersection){
 	return prevIntersection.getX() + "" + prevIntersection.getY() + "" + nextIntersection.getX() + "" + nextIntersection.getY()
 }
 
-var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree){
+var obstacleFailCheck = function(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree){
 	for(var i=0;i<obstacles.length;i++){
 		if(verifyPosition(carPosX, carPosY, carSpeed, obstacles[i], tick)){
 			var ruleCheck = RuleChecker.check(obstacles[i].getType(), carSpeed)
 			if(ruleCheck.fail == true){
 				//console.log(ruleCheck.reason)
 				if(ruleCheck.accelerationMultiplier != undefined){
-					return false
+					car.engine.setFlat()
+					return {failed: false, reason: ruleCheck.reason}
 				}
-				return true
+				return {failed: true, reason: ruleCheck.reason}
 			}
 		}
 	}
-	return false
+	return {failed: false, reason: 'Ok'}
 }
 
 var distanceToObstacle = function(carPosX, carPosY, obstacle){
@@ -201,4 +182,17 @@ var isOutOfBounds = function(carPosX, carPosY, roadsLength){
 		return true
 	}
 	return false
+}
+
+var addJsonResponse = function(response, eventType , time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap){
+	response.push({
+		event: eventType, 
+		time: time,
+		x: carPosX,
+		y: carPosY,
+		angle: referenceDegree,
+		carSpeed: carSpeed,
+		carAcceleration: carAcceleration,
+		currentLap: currentLap
+	})
 }

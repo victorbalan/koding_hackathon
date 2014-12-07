@@ -4,7 +4,7 @@ var ObstacleType = require('./obstacleType')
 
 
 module.exports.getMockedBaseMap = function(){
-		var intersectionMatrix = []
+	var intersectionMatrix = []
 	intersectionMatrix[100] = []
 	intersectionMatrix[100][100] = {semaphore: true, events: ["GROAPA", "CACAT"]}
 	intersectionMatrix[100][150] = {semaphore: false, events: []}
@@ -39,12 +39,12 @@ module.exports.getCircuitMap = function(){
 	intersectionMatrix[300][200] = {semaphore: false, events: []}
 	intersectionMatrix[300][300] = {semaphore: false, events: []}
 
-	var o1 = new Obstacle(0, 100, 145, ObstacleType.POTHOLE)
-	var o2 = new Obstacle(0, 115, 150, ObstacleType.POTHOLE)
+	var o1 = new Obstacle(0, 150, 100, ObstacleType.POTHOLE)
+	var o2 = new Obstacle(0, 250, 200, ObstacleType.POTHOLE)
 	var o3 = new Obstacle(0, 140, 150, ObstacleType.POTHOLE)
 
-	var road = [{fromX: 100, fromY: 100, toX: 200, toY: 100, obstacles: [o2]},
-		  {fromX: 200, fromY: 100, toX: 200, toY: 200, obstacles: []},
+	var road = [{fromX: 100, fromY: 100, toX: 200, toY: 100, obstacles: [o1]},
+		  {fromX: 200, fromY: 100, toX: 200, toY: 200, obstacles: [o2]},
 		  {fromX: 200, fromY: 200, toX: 300, toY: 200, obstacles: []},
 		  {fromX: 300, fromY: 200, toX: 300, toY: 300, obstacles: []},
 		  {fromX: 300, fromY: 300, toX: 100, toY: 300, obstacles: []},
