@@ -8,17 +8,23 @@ module.exports.getMockedBaseMap = function(){
 	intersectionMatrix[100] = []
 	intersectionMatrix[100][100] = {semaphore: true, events: ["GROAPA", "CACAT"]}
 	intersectionMatrix[100][150] = {semaphore: false, events: []}
+	intersectionMatrix[100][250] = {semaphore: false, events: []}
+	intersectionMatrix[100][300] = {semaphore: false, events: []}
 	intersectionMatrix[150] = []
 	intersectionMatrix[150][150] = {semaphore: false, events: []}
+	intersectionMatrix[150][200] = {semaphore: false, events: []}
 
-	var o1 = new Obstacle(0, 100, 145, ObstacleType.SPEEDLIMIT50)
-	var o2 = new Obstacle(0, 115, 150, ObstacleType.SPEEDLIMIT90)
+	var o1 = new Obstacle(0, 100, 145, ObstacleType.POTHOLE)
+	var o2 = new Obstacle(0, 115, 150, ObstacleType.POTHOLE)
 	var o3 = new Obstacle(0, 140, 150, ObstacleType.POTHOLE)
 
 	var road = [{fromX: 100, fromY: 100, toX: 100, toY: 150, obstacles: [o1]},
-		{fromX: 100, fromY: 150, toX: 150, toY: 150, obstacles: [o2, o3]}]
+		{fromX: 100, fromY: 150, toX: 150, toY: 150, obstacles: [o2]},
+		{fromX: 150, fromY: 150, toX: 150, toY: 200, obstacles: []},
+		{fromX: 150, fromY: 200, toX: 100, toY: 250, obstacles: []},
+		{fromX: 100, fromY: 250, toX: 100, toY: 300, obstacles: []}]
 
-	return MapGenerationService.generate(intersectionMatrix, road, 100100, 150150)
+	return MapGenerationService.generate(intersectionMatrix, road, 100100, 100300)
 }
 
 module.exports.getCircuitMap = function(){

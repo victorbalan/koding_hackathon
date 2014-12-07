@@ -4,7 +4,7 @@ module.exports.check = function(obstacleType, carSpeed){
 	switch(obstacleType){
 		case ObstacleType.POTHOLE:
 			if(carSpeed>25){
-				return {fail: true, reason: 'Car broken due to hole fuck'}
+				return {fail: true, reason: 'You got a flat tire', accelerationMultiplier: 0.5}
 			}else{
 				return {fail: false}
 			}

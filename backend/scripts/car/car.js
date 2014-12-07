@@ -3,7 +3,7 @@ var Engine = require('./modules/engine')
 module.exports = function(callback){
 	this.acceleration = 0
 	this.speed = 0
-	this.engine = new Engine(5, 140)
+	this.engine 
 	this.x = 0
 	this.y = 0
 	this.events 
@@ -14,11 +14,11 @@ module.exports = function(callback){
 		if(infoToNextObstacle!=undefined){
 			// console.log(infoToNextObstacle.distance)
 		}
-		this.acceleration = 0
-		// if(this.x > 115){
-		// 	this.acceleration = 10
-		// }
-		console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
+		this.acceleration = 100
+		if(this.y > 260){
+			this.acceleration = -100
+		}
+		//console.log("speed: " + this.speed + " Car pos X:" + this.x + " Y: " + this.y + " At Time:" +this.elapsedTime)
 	}
 
 	this.parseRoad = function(){
@@ -62,5 +62,9 @@ module.exports = function(callback){
 
 	this.setElapsedTime = function(time){
 		this.elapsedTime = time
+	}
+
+	this.setEngine = function(engine){
+		this.engine = engine
 	}
 }
