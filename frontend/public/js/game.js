@@ -43,9 +43,10 @@ $(document).ready(function() {
 		}));
 
 		var car = stage.insert(new Q.Car({x: 175, y:500, scale: 0.4}));
-		stage.add("viewport").follow(car, {x:true, y:false});
+		stage.add("viewport").follow(car, {x:true, y:true});
+		stage.viewport.scale = 1;
 		
-		var frame = stage.insert(new Q.UI.Button({on: false, x:85, y: 300, label: "bottom_right", fill: "#ddddff"}));
+		var frame = stage.insert(new Q.UI.Button({on: false, x:175, y: 500, label: "bottom_right", fill: "#ddddff"}));
 		
 		frame.on("click", function() {
 			if(this.p.label == "bottom_right"){
@@ -63,7 +64,7 @@ $(document).ready(function() {
 			}
 		});
 
-		/*car.play("go");*/
+		car.play("go");
 	});
  
  	Q.load("car.png, car.json, tiles.png, tiles.json, background.png", function() {
