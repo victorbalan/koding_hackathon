@@ -148,9 +148,9 @@ var obstacleFailCheck = function(carPosX, carPosY, carSpeed, tick, obstacles, re
 				response.push({
 					event: obstacles[i].type,
 					time: time,
-					carPosX: obstacles[i].getX(),
-					carPosY: obstacles[i].getY(),
-					carAngle: 0,
+					x: obstacles[i].getX(),
+					y: obstacles[i].getY(),
+					angle: 0,
 					carSpeed: carSpeed
 				})
 				if(ruleCheck.accelerationMultiplier != undefined){
