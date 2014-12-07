@@ -1,10 +1,5 @@
 
-Quintus.Test = function(Q) {
-
-  Q.test = function(msg) {
-    console.log(msg)
-  }
-
+Quintus.MapGeneration = function(Q) {
     Q.transformMatrixToMap = function(roads, length){
     	console.log("TRANFORM MAP")
 		var TOP_PART = 20
@@ -169,9 +164,91 @@ Quintus.Test = function(Q) {
 	   }
 	   response += '\n'
 	  }
-	  // console.log(response)
     	return matrix
 
+    }
+
+    Q.generateObstacles = function(road, matrixMaxLength) {
+    	var SEMAPHORE_RED = 1;
+    	var SEMAPHORE_GREEN = 3;
+    	var POT_HOLE = 2;
+    	var FINISH = 4;
+    	var START = 4;
+
+
+    	var obstacles = []
+
+    	for(var i=0; i<road.length; i++){
+    		if(road[i].obstacles!=[]){
+    			for(var j=0;j<road[i].obstacles.length;j++){
+    				obstacles.push(road[i].obstacles[j])
+    			}
+    		}
+    	}
+
+    	console.log(obstacles)
+
+		var getEmptyMatrix = function(n){
+			var m = []
+			for(var i=0;i<n;i++){
+				m[i] = []
+				for(var j=0;j<n;j++){
+					m[i][j] = 0
+				}
+			}
+			return m
+		}
+
+		var matrix = getEmptyMatrix(2*matrixMaxLength)
+
+		for(var i=0;i<obstacles.length;i++){
+			var x = obstacles[i].x
+			var y = obstacles[i].y
+			var obstacleType = obstacles[i].type
+			var toPlant = 0
+			switch(obstacleType){
+				case "POTHOLE":
+					toPlant = POT_HOLE
+					break;
+				case "SPEEDLIMIT50":
+					toPlant = SEMAPHORE_RED
+					break;
+				case "SPEEDLIMIT90":
+					toPlant = SEMAPHORE_RED
+					break;
+				case "NOSPEEDLIMIT":
+					toPlant = SEMAPHORE_RED
+					break;
+				case "SEMAPHORE_GREEN":
+					toPlant = SEMAPHORE_GREEN
+					break;
+				case "SEMAPHORE_RED":
+					toPlant = SEMAPHORE_RED
+					break;
+			}
+			console.log("x: " + x + " and y " + y)
+			matrix[2*y][2*x] =  toPlant
+			matrix[2*y + 1][2*x] =  toPlant
+			matrix[2*y][2*x + 1] =  toPlant
+			matrix[2*y + 1][2*x + 1] =  toPlant
+		}
+
+		var startX = road[0].fromX
+		var startY = road[0].fromY
+
+		var endX = road[road.length-1].toX
+		var endY = road[road.length-1].toY
+
+		matrix[2*startY][2*startX] = START
+		matrix[2*startY][2*startX+1] = START
+		matrix[2*startY+1][2*startX] = START
+		matrix[2*startY+1][2*startX+1] = START
+		matrix[2*endY][2*endX] = FINISH
+		matrix[2*endY][2*endX+1] = FINISH
+		matrix[2*endY+1][2*endX] = FINISH
+		matrix[2*endY+1][2*endX+1] = FINISH
+
+    	return matrix;
     }
 
 	Q.TileLayer.extend("MyTileLayer", {

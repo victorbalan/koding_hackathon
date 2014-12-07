@@ -11,16 +11,14 @@
 //= require mapGeneration
 
 var startGame = function(road, matrixMaxLength, events) {
-	// console.log(road);
-	// console.log(matrixMaxLength);
-	console.log(events);
   	var Q = Quintus()
   			.setup("game")
-  			.include("Sprites, UI, Input, Touch, Anim, Scenes, 2D, Test")
+  			.include("Sprites, UI, Input, Touch, Anim, Scenes, 2D, MapGeneration")
   			.controls()
   			.touch();
 
 	var generatedMap = Q.transformMatrixToMap(road, matrixMaxLength)
+	var generatedObstacles = Q.generateObstacles(road, matrixMaxLength)
 
   	Q.Sprite.extend("Car", {
 	    init: function(p) {
@@ -48,9 +46,13 @@ var startGame = function(road, matrixMaxLength, events) {
 		var car = new Q.Car({x: 100, y:100, scale: 0.4}); 
 		car.add("tween, animation");
 
+		stage.insert(new Q.MyTileLayer({
+			dataAsset: generatedObstacles,
+			sheet: 'sprites'
+		}));
+
 		stage.insert(car);
 		stage.add("viewport").follow(car, {x:true, y:true});
-
 		stage.viewport.scale = 1.5;
 		var selfi = 0
 		for (i = 0; i < events.length - 1; i++) {
@@ -79,7 +81,8 @@ var startGame = function(road, matrixMaxLength, events) {
    		}	
 	});
  
- 	Q.load("car.png, tiles.png, background.png", function() {
+ 	Q.load("car.png, tiles.png, background.png, sprites.png, sprites.json", function() {
+ 		Q.sheet("sprites", "sprites.png", {tilew: 32, tileh:32});
  		Q.sheet("tiles", "tiles.png", {tilew: 32, tileh: 32});
  		Q.sheet("car", "car.png", {tilew: 63, tileh: 118});
  		Q.stageScene("Game");

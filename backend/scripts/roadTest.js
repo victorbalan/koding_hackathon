@@ -11,7 +11,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(5, 150, -100)
+	var engine = new Engine(20, 50, -100)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
@@ -54,13 +54,13 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 				if(startIntersection == finishIntersection){
 					if(currentLap == 10){
 						finished = true
-						addJsonResponse(response, 'FINISHED', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
+						addJsonResponse(response, 'FINISHED', time, finishIntersection.getX(), finishIntersection.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
 					}else{
 						currentLap +=1
 					}
 				}else{
 					finished = true
-					addJsonResponse(response, 'FINISHED', time, carPosX, carPosY, referenceDegree, carSpeed, carAcceleration, currentLap)
+					addJsonResponse(response, 'FINISHED', time, finishIntersection.getX(), finishIntersection.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
 				}
 			}
 			var obstacle = obstacleFailCheck(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree)
