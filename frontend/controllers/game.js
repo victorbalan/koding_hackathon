@@ -13,7 +13,7 @@ exports.game = function(req, res) {
 	    		var events = jsonBody.events
 	    		var roads = jsonBody.roads
 				var maxLength = jsonBody.roadsLength; 	
-	    		console.log(events)
+	    		//console.log(events)
 				res.render('game', {
 					title: 'Game',
 					roads: roads,
