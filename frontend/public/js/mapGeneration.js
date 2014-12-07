@@ -24,128 +24,83 @@ Quintus.Test = function(Q) {
 			}
 			return false
 		}
-		var checkCollision = function(i, j){
+
+		var checkCollisionAndUpdateFarCorner = function(i, j){
 			if(matrix[i][j]!=0){
-				matrix[i][j]=-1
-				if(zeroOrUndefinedCheck(matrix[i-1][j])){
-					if(zeroOrUndefinedCheck(matrix[i][j+1])){
-						matrix[i][j] = 12
-					}
-				}
-				
-				if(zeroOrUndefinedCheck(matrix[i-1][j])){
-					if(zeroOrUndefinedCheck(matrix[i][j-1])){
-						matrix[i][j] = 16
-					}
-				}
-
-				if(zeroOrUndefinedCheck(matrix[i+1][j])){
-					if(zeroOrUndefinedCheck(matrix[i][j+1])){
-						matrix[i][j] = 8
-					}
-				}
-
-				if(zeroOrUndefinedCheck(matrix[i+1][j])){
-					if(zeroOrUndefinedCheck(matrix[i][j-1])){
-						matrix[i][j] = 4
-					}
-				}
+				matrix[i][j] = 0
 				return true
 			}
 			return false
 		}
 
-		// - check matrix inner curves. Look @ picture
-		// 4 means bottom left
-		// 8 means bottom right
-		// 12 means top right
-		// 16 means top left
-		// - if we get this values we will 
-		// set the adjacent positions to the needed sprite nr
-		var checkInnerCurves = function(i, j){
-			if(matrix[i][j]==4){
-				matrix[i-1][j] = 3
-				matrix[i-1][j+1] = 2
-				matrix[i][j+1] = 1
-			}else if(matrix[i][j]==8){
-				matrix[i-1][j] = 5
-				matrix[i-1][j-1] = 6
-				matrix[i][j-1] = 7
-			}else if(matrix[i][j]==12){
-				matrix[i+1][j] = 11
-				matrix[i+1][j-1] = 10
-				matrix[i][j-1] = 9
-			}else if(matrix[i][j]==16){
-				matrix[i+1][j] = 13
-				matrix[i+1][j+1] = 14
-				matrix[i][j+1] = 15
+		for(var i = 0; i<roads.length;i++){
+			var currentRoad = roads[i]
+			if(currentRoad.fromX == currentRoad.toX){
+				// VERTICAL
+				console.log("X is " + currentRoad.toX)
+				var currentX = 2*currentRoad.fromX
+				var from = currentRoad.fromY
+				var to = currentRoad.toY
+				if(from>to){
+					var aux = from
+					from = to
+					to = aux
+				}
+				console.log(from + " from and to " + to + " for HORIZONTAL")
+				for(var j=from; j<=to;j++){
+					if(!checkCollisionAndUpdateFarCorner(2*j, currentX)){
+						matrix[2*j][currentX] = 24
+					}
+					if(!checkCollisionAndUpdateFarCorner(2*j, currentX + 1)){
+						matrix[2*j][currentX+1] = 23
+					}
+					if(!checkCollisionAndUpdateFarCorner(2*j + 1, currentX)){
+						matrix[2*j+1][currentX] = 24
+					}
+					if(!checkCollisionAndUpdateFarCorner(2*j + 1, currentX + 1)){
+						matrix[2*j+1][currentX+1] = 23
+					}
+				}
+			}else if(currentRoad.fromY == currentRoad.toY){
+				// VERTICAL
+				console.log("Y is " + currentRoad.toY)
+				var currentY = 2*currentRoad.fromY
+				var from = currentRoad.fromX
+				var to = currentRoad.toX
+				if(from>to){
+					var aux = from
+					from = to
+					to = aux
+				}
+				console.log(from + " from and to " + to + " for VERTICAL")
+				for(var j=from; j<=to;j++){
+					if(!checkCollisionAndUpdateFarCorner(currentY, j)){
+						matrix[currentY][2*j] = 20
+					}
+					if(!checkCollisionAndUpdateFarCorner(currentY + 1, j)){
+						matrix[currentY+1][2*j] = 19
+					}
+					if(!checkCollisionAndUpdateFarCorner(currentY, j + 1)){
+						matrix[currentY][2*j+1] = 20
+					}
+					if(!checkCollisionAndUpdateFarCorner(currentY + 1, j + 1)){
+						matrix[currentY+1][2*j+1] = 19
+					}
+				}
 			}
 		}
-
-		for(var i=0;i<roads.length;i++){
-			if(roads[i].fromX == roads[i].toX){
-				//case 1 = straight horizontal line
-				var fromY = roads[i].fromY
-				var toY = roads[i].toY
-				var x = 2*roads[i].fromX
-				if(fromY> toY){
-					var aux = fromY
-					fromY = toY
-					toY = aux
+		for(var i=0;i<matrix.length;i++){
+			var line = "";
+			for(var j=0;j<matrix.length;j++){
+				if(matrix[i][j]!=0){
+					line = line + "[" + i + "," + j + ":" + matrix[i][j] + "] ";
 				}
-				for(var j=fromY; j<=toY;j++){
-					// parse all the roads for collisions to set the curve corners
-					if(!checkCollision(x,2*j)){
-						matrix[x][2*j] = 20
-					}
-					if(!checkCollision(x+1,2*j)){
-						matrix[x+1][2*j] = 19
-					}
-					if(!checkCollision(x,2*j+1)){
-						matrix[x][2*j+1] = 20
-					}
-					if(!checkCollision(x+1,2*j+1)){
-						matrix[x+1][2*j+1] = 19
-					}
-				}
-			}else if(roads[i].fromY == roads[i].toY){
-				//case 2 = straight vertical line
-				var fromX = roads[i].fromX
-				var toX = roads[i].toX
-				var y = 2*roads[i].fromY
-				if(fromX> toX){
-					var aux = fromX
-					fromX = toX
-					toX = aux
-				}
-				for(var j=fromX; j<=toX;j++){
-					// parse all the roads for collisions to set the curve corners
-					if(!checkCollision(2*j,y)){
-						matrix[2*j][y] = 24
-					}
-					if(!checkCollision(2*j,y+1)){
-						matrix[2*j][y+1] = 23
-					}
-					if(!checkCollision(2*j+1,y)){
-						matrix[2*j+1][y] = 24
-					}
-					if(!checkCollision(2*j+1,y+1)){
-						matrix[2*j+1][y+1] = 23
-					}
-				}
-			}		
-		}
-
-		for(var i=0; i<matrix.length;i++){
-			var matrixLine = ""
-			for(var j=0; j<matrix.length;j++){
-				checkInnerCurves(i, j)
-				matrixLine = matrixLine + "[" + i + "," + j +":"+ matrix[i][j] + "]" + " "
 			}
-			// console.log(matrixLine)
-			// console.log("")
-		}	
-		// console.log(matrix)
+			if(line!=""){
+				console.log(line)
+				console.log("")
+			}	
+		}
     	return matrix
 
     }
