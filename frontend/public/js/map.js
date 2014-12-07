@@ -8,14 +8,17 @@
 //= require lib/quintus_tmx
 //= require lib/quintus_touch
 //= require lib/quintus_ui
+//= require mapGeneration
 
 $(document).ready(function() {
   	var Q = Quintus()
   			.setup("map")
-  			.include("Sprites,UI,Input,Touch,Anim,Scenes,2D")
+  			.include("Sprites,UI,Input,Touch,Anim,Scenes,2D,Test")
   			.controls()
   			.touch();
-
+	Q.test("mama ta e o grasana")
+	var generatedMap = Q.transformMatrixToMap()
+	// Q.transformMatrixToMap()
   	Q.Sprite.extend("Car", {
 	    init: function(p) {
 	        this._super(p, {
@@ -37,14 +40,14 @@ $(document).ready(function() {
 	Q.scene('Game', function(stage) {
 		stage.insert(new Q.Repeater({asset: "background.png", speedX: 0.5, speedY: 0.5, scale: 1}))
 
-		stage.insert(new Q.TileLayer({
-			dataAsset: 'circuit.json',
+		stage.insert(new Q.MyTileLayer({
+			dataAsset: generatedMap,
 			sheet: 'circuit'
 		}));
 
 		var car = stage.insert(new Q.Car({x: 175, y:500, scale: 0.4}));
 		stage.add("viewport").follow(car, {x:true, y:true});
-		stage.viewport.scale = 0.8;
+		stage.viewport.scale = 0.2;
 
 	});
  
