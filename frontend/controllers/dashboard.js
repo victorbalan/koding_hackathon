@@ -21,18 +21,22 @@ exports.getDashboard = function(req, res) {
 				}
 			}
 			for(var j=0;j<races.length;j++){
-				carMap[races[j].carid].counter = carMap[races[j].carid].counter +1
-				if(maxSpeedReached < races[j].maxSpeed) {
-					maxSpeedReached = races[j].maxSpeed;
-				}
-				if(races[j].won == true) {
-					racesWon++;
+				if(carMap[races[j].carid]!=undefined){
+					carMap[races[j].carid].counter = carMap[races[j].carid].counter +1
+					if(maxSpeedReached < races[j].maxSpeed) {
+						maxSpeedReached = races[j].maxSpeed;
+					}
+					if(races[j].won == true) {
+						racesWon++;
+					}
 				}
 			}
 			for(var k=0;k<races.length;k++) {
-				if(maxCount < carMap[races[k].carid].counter) {
-					maxCount = carMap[races[k].carid].counter;
-					mostUsedCar = carMap[races[k].carid].carId;
+				if(carMap[races[k].carid]!=undefined){
+					if(maxCount < carMap[races[k].carid].counter) {
+						maxCount = carMap[races[k].carid].counter;
+						mostUsedCar = carMap[races[k].carid].carId;
+					}
 				}
 			}
 			var neededCarName = undefined
