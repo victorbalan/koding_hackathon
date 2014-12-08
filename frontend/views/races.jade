@@ -22,6 +22,15 @@ block content
 							if(races.indexOf(race)!=-1)
 								option(value='#{race._id}') #{race.name}
 			.form-group
+				p.col-sm-4.control-label Mode:
+				.col-sm-8
+					label.radio-inline
+						input#inlineRadio1(type='radio', value='option1', name='gameMode')
+						| Single player
+					label.radio-inline
+						input#inlineRadio2(type='radio', value='option2', name='gameMode')
+						| Multiplayer
+			.form-group
 				.col-sm-4.col-sm-offset-4
 					input(type='submit', value='Start race', name='submit').btn.btn-default.form-control
 			canvas(id="map", width="800", height="600")
