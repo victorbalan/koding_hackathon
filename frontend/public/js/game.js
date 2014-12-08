@@ -55,6 +55,8 @@ var startGame = function(road, matrixMaxLength, events) {
 		stage.add("viewport").follow(car, {x:true, y:true});
 		stage.viewport.scale = 1.5;
 		var selfi = 0
+		var allEvents = ""
+
 		for (i = 0; i < events.length - 1; i++) {
    			car.chain({x: events[i].x * 64.1, y: events[i].y * 64.1, angle: - events[i].angle}, events[i+1].time - events[i].time,
    				{
@@ -74,6 +76,14 @@ var startGame = function(road, matrixMaxLength, events) {
 							}
 							if(events[selfi].currentLap!=undefined){
 								$('#currentLap').text("Current lap: " + events[selfi].currentLap)
+							}
+							if(events[selfi].currentLap!=undefined){
+								$('#currentTime').text("Time: " + events[selfi].time)
+							}
+							if(events[selfi].event!=undefined && events[selfi].event!="NORMAL"){
+								allEvents = allEvents + "Event: " + events[selfi].event + " at " + events[selfi].time + "\n" 
+									+ "<div class='clear'></div>" 
+								$('#event').html(allEvents)
 							}
 						}
 					} 

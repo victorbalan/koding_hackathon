@@ -24,7 +24,7 @@ module.exports.getMockedBaseMap = function(){
 		{fromX: 150, fromY: 200, toX: 100, toY: 250, obstacles: []},
 		{fromX: 100, fromY: 250, toX: 100, toY: 300, obstacles: []}]
 
-	return MapGenerationService.generate(intersectionMatrix, road, 100100, 100300, 301)
+	return MapGenerationService.generate(intersectionMatrix, road, 100100, 100300, 302)
 }
 
 module.exports.getCircuitMap = function(){
@@ -68,7 +68,7 @@ module.exports.getLevelMap = function(level){
 
 			var road = [{fromX: 100, fromY: 100, toX: 100, toY: 500, obstacles: []}]
 
-			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100500, 501)
+			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100500, 502)
 			break;
 		case 2:
 			var intersectionMatrix = []
@@ -85,7 +85,7 @@ module.exports.getLevelMap = function(level){
 				{fromX: 150, fromY: 150, toX: 150, toY: 200, obstacles: []},
 				{fromX: 150, fromY: 200, toX: 100, toY: 200, obstacles: []}]
 
-			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100200, 201)
+			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100200, 202)
 			break;
 		case 3:
 			var intersectionMatrix = []
@@ -108,7 +108,7 @@ module.exports.getLevelMap = function(level){
 				{fromX: 150, fromY: 200, toX: 100, toY: 200, obstacles: []},
 				{fromX: 100, fromY: 200, toX: 100, toY: 250, obstacles: [o3]}]
 
-			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100250, 251)
+			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100250, 252)
 			break;
 		case 4:
 			var intersectionMatrix = []
@@ -135,7 +135,7 @@ module.exports.getLevelMap = function(level){
 				  {fromX: 100, fromY: 300, toX: 100, toY: 200, obstacles: []}]
 
 
-			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100200, 301)
+			return MapGenerationService.generate(intersectionMatrix, road, 100100, 100200, 302)
 			break;
 		case 5:
 			var intersectionMatrix = []
@@ -161,7 +161,7 @@ module.exports.getLevelMap = function(level){
 				  {fromX: 100, fromY: 300, toX: 100, toY: 100, obstacles: []}]
 
 
-			return MapGenerationService.generate(intersectionMatrix, road, '100100', '100100', 301)
+			return MapGenerationService.generate(intersectionMatrix, road, '100100', '100100', 302)
 			break;
 	}
 }

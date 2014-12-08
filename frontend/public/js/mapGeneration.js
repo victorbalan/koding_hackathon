@@ -223,7 +223,7 @@ Quintus.MapGeneration = function(Q) {
 				case "SPEEDTRAP120":
 					toPlant = SPEED_TRAP_120
 					break;
-				case "NOSPEEDLIMIT":
+				case "SPEEDTRAP120":
 					toPlant = SEMAPHORE_GREEN
 					break;
 				case "SEMAPHORE_GREEN":
