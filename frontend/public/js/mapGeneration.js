@@ -170,10 +170,13 @@ Quintus.MapGeneration = function(Q) {
 
     Q.generateObstacles = function(road, matrixMaxLength) {
     	var SEMAPHORE_RED = 1;
-    	var SEMAPHORE_GREEN = 3;
-    	var POT_HOLE = 2;
-    	var FINISH = 4;
-    	var START = 4;
+    	var SEMAPHORE_GREEN = 2;
+    	var POT_HOLE = 4;
+    	var FINISH = 3;
+    	var START = 8;
+    	var SPEED_TRAP_50 = 6;
+    	var SPEED_TRAP_90 = 7;
+    	var SPEED_TRAP_120 = 5;
 
 
     	var obstacles = []
@@ -206,18 +209,22 @@ Quintus.MapGeneration = function(Q) {
 			var y = obstacles[i].y
 			var obstacleType = obstacles[i].type
 			var toPlant = 0
+			
 			switch(obstacleType){
 				case "POTHOLE":
 					toPlant = POT_HOLE
 					break;
-				case "SPEEDLIMIT50":
-					toPlant = SEMAPHORE_RED
+				case "SPEEDTRAP50":
+					toPlant = SPEED_TRAP_50
 					break;
-				case "SPEEDLIMIT90":
-					toPlant = SEMAPHORE_RED
+				case "SPEEDTRAP90":
+					toPlant = SPEED_TRAP_90
+					break;
+				case "SPEEDTRAP120":
+					toPlant = SPEED_TRAP_120
 					break;
 				case "NOSPEEDLIMIT":
-					toPlant = SEMAPHORE_RED
+					toPlant = SEMAPHORE_GREEN
 					break;
 				case "SEMAPHORE_GREEN":
 					toPlant = SEMAPHORE_GREEN
@@ -226,7 +233,7 @@ Quintus.MapGeneration = function(Q) {
 					toPlant = SEMAPHORE_RED
 					break;
 			}
-			console.log("x: " + x + " and y " + y)
+
 			matrix[2*y][2*x] =  toPlant
 			matrix[2*y + 1][2*x] =  toPlant
 			matrix[2*y][2*x + 1] =  toPlant
