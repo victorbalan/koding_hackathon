@@ -7,15 +7,29 @@ exports.game = function(req, res) {
 		Car.find(function(err, cars){
 			var car = undefined
 			var car2 = undefined
+			var getRandomInt = function(min, max) {
+			  	return Math.floor(Math.random() * (max - min)) + min;
+			}
+			var ourCarIndex = 0
 			for(var i=0;i<cars.length;i++){
 				if(cars[i]._id == req.body.carId){
 					car = cars[i]
+					ourCarIndex = i
 				}else{
 					car2 = cars[i]
 				}
 			}
+			var finished = false
+			var opponentCarIndex = opponentCarIndex = getRandomInt(0, cars.length)
+			while(!finished){
+				if(opponentCarIndex != ourCarIndex){
+					finished = true
+				}else{
+				opponentCarIndex = getRandomInt(0, cars.length)
+				}
+			}
+			console.log("ourCarIndex: " + ourCarIndex + " randomOpponentIndex: " + opponentCarIndex)
 			if(car2!=undefined){
-				console.log(car._id + " " + car2._id)
 			    request.post('http://localhost:8081/cars/test', 
 			    	{form :
 			    		{raceId: req.body.raceId,
