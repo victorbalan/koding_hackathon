@@ -6,7 +6,7 @@ block content
 		| #{error}
 	h4 This is our current possible races. Select a car, a race and may the code be on your side.
 	.row
-		form(method='post', role="form", action = "/game").form-horizontal.col-sm-4
+		form#ourform(method='post', role="form", action = "/game").form-horizontal.col-sm-4
 			.form-group
 				p.col-sm-4.control-label Car:
 				.col-sm-6
@@ -25,10 +25,10 @@ block content
 				p.col-sm-4.control-label Mode:
 				.col-sm-8
 					label.radio-inline
-						input#inlineRadio1(type='radio', value='option1', name='gameMode')
+						input(type='radio', value='game', name='gameMode', onclick="$(ourform).attr('action', '/game')")
 						| Single player
 					label.radio-inline
-						input#inlineRadio2(type='radio', value='option2', name='gameMode')
+						input(type='radio', value='multiplayer', name='gameMode', onclick="$(ourform).attr('action', '/multiplayer')")
 						| Multiplayer
 			.form-group
 				.col-sm-4.col-sm-offset-4

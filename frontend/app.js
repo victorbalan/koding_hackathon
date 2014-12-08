@@ -34,6 +34,7 @@ var races = require('./controllers/races');
 var garage = require('./controllers/garage');
 var tutorial = require('./controllers/tutorial');
 var gameController = require('./controllers/game');
+var multiplayer = require('./controllers/multiplayer');
 var dashboard = require('./controllers/dashboard');
 
 /**
@@ -64,7 +65,7 @@ mongoose.connection.on('error', function() {
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/fileUpload', '/game', '/garage'];
+var csrfExclude = ['/fileUpload', '/game', '/garage', '/multiplayer'];
 
 /**
  * Express configuration.
@@ -143,6 +144,7 @@ app.get('/tutorial', tutorial.getTutorial)
 app.get('/downloadModelCar', tutorial.getModelCar)
 app.get('/game', races.getRaces);
 app.post('/game', gameController.game);
+app.post('/multiplayer', multiplayer.game)
 app.get('/races', races.getRaces);
 app.get('/dashboard', dashboard.getDashboard)
 

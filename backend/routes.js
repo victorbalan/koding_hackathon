@@ -64,6 +64,85 @@ module.exports = function(app){
 		}
 	})
 
+	app.post('/cars/test', function(req, res){
+		var raceId = req.body.raceId
+		var Car = stringToModule(req.body.carModel1)
+		var Car2 = stringToModule(req.body.carModel2)
+		switch(raceId){
+			case "LVL1":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(1), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getLevelMap(1), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})		
+				})
+				break
+			case "LVL2":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(2), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getLevelMap(2), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})		
+				})
+				break
+			case "LVL3":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(3), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getLevelMap(3), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})				
+				})
+				break
+			case "LVL4":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(4), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getLevelMap(4), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})		
+				})
+				break
+			case "LVL5":
+				CarTestingService.testUserCar(Car, MapMockingService.getLevelMap(5), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getLevelMap(5), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})		
+				})
+				break
+			case "CIRCUIT":
+				CarTestingService.testUserCar(Car, MapMockingService.getCircuitMap(), function(response){
+					var toSend = {}
+					toSend.car1 = response
+
+					CarTestingService.testUserCar(Car2, MapMockingService.getCircuitMap(), function(response){
+						toSend.car2 = response
+						res.send(toSend)
+					})		
+				})
+				break
+			case "SPRINT":
+				res.send(404)
+				break 
+			default:
+				res.send(404)
+		}
+	})
+
 	app.get('/base', function(req, res){
 		res.send(MapMockingService.getRoadsForBaseMap())
 	})

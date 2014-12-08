@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='csrf-token', content=_csrf)
+    title #{title} - Hackathon Starter
+    != css('main')
+  body
+    include partials/navbar
+
+    .container
+      include partials/flash
+      block content
+        .page-header
+          h3.col-sm-offset-2 Race
+        .row
+          .col-sm-offset-2
+            p#carSpeed
+            p#carAcceleration
+            p#currentLap
+            p#currentTime
+        canvas(id="game", width="800", height="600")
+        .row
+          .col-sm-offset-2
+            p#carSpeed2
+            p#carAcceleration2
+            div#event
+
+    include partials/footer
+
+    != js('application')
+    script(src='http://cdn.html5quintus.com/v0.2.0/quintus-all.min.js')
+    != js('multiplayer')
+    script(type='text/javascript')
+      | startGame(!{JSON.stringify(roads)}, #{matrixMaxLength}, !{JSON.stringify(eventsp1)}, !{JSON.stringify(eventsp2)})

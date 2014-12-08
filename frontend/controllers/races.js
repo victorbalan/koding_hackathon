@@ -7,7 +7,6 @@ exports.getRaces = function(req, res) {
 			cars: cars,
 			races: [
 				{_id:'CIRCUIT', name: "Circuit"}, 
-				{_id: 'SPRINT', name: "Sprint"},
 				{_id: 'LVL1', name: "Level 1"},
 				{_id: 'LVL2', name: "Level 2"},
 				{_id: 'LVL3', name: "Level 3"},
