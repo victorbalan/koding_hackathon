@@ -30,6 +30,16 @@ var startGame = function(road, matrixMaxLength, eventsp1, eventsp2) {
 	   	}  	
 	});
 
+	Q.Sprite.extend("Car2", {
+	    init: function(p) {
+	        this._super(p, {
+	        	sheet: "car2",
+	        	sprite: "car2",
+	        	frame: 0
+	        });         
+	   	}  	
+	});
+
 	Q.animations('car', {
 		go: { frames: [1], loop: false},
 		stop: { frames: [0], loop: false }
@@ -44,7 +54,7 @@ var startGame = function(road, matrixMaxLength, eventsp1, eventsp2) {
 		}));
 
 		var car = new Q.Car({x: 100, y:100, scale: 0.4}); 
-		var car2 = new Q.Car({x: 150, y:100, scale: 0.4}); 
+		var car2 = new Q.Car2({x: 150, y:100, scale: 0.4}); 
 		car.add("tween, animation");
 		car2.add("tween, animation");
 
@@ -112,10 +122,11 @@ var startGame = function(road, matrixMaxLength, eventsp1, eventsp2) {
    		}	
 	});
  
- 	Q.load("car.png, tiles.png, background.png, sprites.png, sprites.json", function() {
+ 	Q.load("car.png, car2.png, tiles.png, background.png, sprites.png, sprites.json", function() {
  		Q.sheet("sprites", "sprites.png", {tilew: 32, tileh:32});
  		Q.sheet("tiles", "tiles.png", {tilew: 32, tileh: 32});
  		Q.sheet("car", "car.png", {tilew: 63, tileh: 118});
+ 		Q.sheet("car2", "car2.png", {tilew: 63, tileh: 118});
  		Q.stageScene("Game");
  	});
 };
