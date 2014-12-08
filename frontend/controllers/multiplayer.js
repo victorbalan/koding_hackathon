@@ -28,6 +28,7 @@ exports.game = function(req, res) {
 				opponentCarIndex = getRandomInt(0, cars.length)
 				}
 			}
+			car2 = cars[opponentCarIndex]
 			console.log("ourCarIndex: " + ourCarIndex + " randomOpponentIndex: " + opponentCarIndex)
 			if(car2!=undefined){
 			    request.post('http://localhost:8081/cars/test', 
