@@ -110,7 +110,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 		carPosX = nextIntersection.getX()
 		carPosY = nextIntersection.getY()
 	}
-	//console.log(response)
+	response[response.length-1].carSpeed = 0
+	response[response.length-1].carAcceleration = 0
+	// console.log(response)
 	if(callback!=undefined){
 		callback({events: response, crash: carfuck, roads: generatedMapData.roads, roadsLength: generatedMapData.roadsLength})
 	}
