@@ -11,7 +11,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(20, 220, -100)
+	var engine = new Engine(10, 80, -5)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
