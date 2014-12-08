@@ -11,7 +11,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 
 	var response = []
 	var car = new Car()
-	var engine = new Engine(20, 40, -100)
+	var engine = new Engine(20, 220, -100)
 	car.engine = engine
 
 	var startIntersection = intersectionsMap[generatedMapData.start]
@@ -19,7 +19,7 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 	car.setPosition(100,100)
 	var time = 0
 	var tick = 0.1
-	var carSpeed = 0 // car starts at 0m/s
+	var carSpeed = 40 // car starts at 0m/s
 	var carAcceleration = car.getAcceleration() //must be diffrent than 0
 	var carPosX = startIntersection.getX()
 	var carPosY = startIntersection.getY()
@@ -53,20 +53,25 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 			if(verifyPosition(carPosX, carPosY, carSpeed, finishIntersection, tick)){
 				if(startIntersection == finishIntersection){
 					if(currentLap == 10){
-						finished = true
 						addJsonResponse(response, 'FINISHED', time, finishIntersection.getX(), finishIntersection.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
+						finished = true
+						carfuck = true
+						break
 					}else{
 						currentLap +=1
 					}
 				}else{
-					finished = true
 					addJsonResponse(response, 'FINISHED', time, finishIntersection.getX(), finishIntersection.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
+					finished = true
+					carfuck = true
+					break
 				}
 			}
 			var obstacle = obstacleFailCheck(car, carPosX, carPosY, carSpeed, tick, obstacles, response, time, referenceDegree)
 			//console.log(obstacle)
 			if(obstacle.code == 1){
-				//if we pass an obstacle set a flag on it as passed or it can be triggered twice
+				addJsonResponse(response, obstacle.reason.type, time, obstacle.reason.getX(), obstacle.reason.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
+				addJsonResponse(response, obstacle.reason.type, time, obstacle.reason.getX(), obstacle.reason.getY(), referenceDegree, carSpeed, carAcceleration, currentLap)
 				finished = true
 				carfuck = true
 				break
@@ -110,9 +115,9 @@ module.exports.testCarForMockedCircuit = function(Car, generatedMapData, callbac
 		carPosX = nextIntersection.getX()
 		carPosY = nextIntersection.getY()
 	}
-	response[response.length-1].carSpeed = 0
-	response[response.length-1].carAcceleration = 0
-	// console.log(response)
+	// response[response.length-1].carSpeed = 0
+	// response[response.length-1].carAcceleration = 0
+	//console.log(response)
 	if(callback!=undefined){
 		callback({events: response, crash: carfuck, roads: generatedMapData.roads, roadsLength: generatedMapData.roadsLength})
 	}
